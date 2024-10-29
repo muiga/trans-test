@@ -7,6 +7,9 @@ import Trans from "./components/Trans";
 
 // @evaluate
 
+const currency = "KES"
+const VITE_REFERRAL_MIN_PAYOUT = 14
+
 function App() {
   const [count, setCount] = useState(0);
 
@@ -43,6 +46,55 @@ function App() {
       <p className="read-the-docs">
         {trans("Click on the Vite and React logos to learn more")}
       </p>
+
+      <div>
+        <h4> <Trans>what is betkumi affiliate program</Trans></h4>
+        <p ><Trans>
+          BetKumi Affiliates is a program where we give you the opportunity to earn
+          money every month simply by giving us the chance to welcome more
+          players through our virtual doors.</Trans>
+        </p>
+        <h4><Trans>How does the Affiliate Program work</Trans></h4>
+        <p >
+          <Trans>
+          When you share your referral link with any of your friends, family or
+          advertise the link and a player signup at our site that player becomes
+          your referral and they will earn you commissions by playing at Betkumi.</Trans>
+        </p>
+        <h4><Trans>How much do i earn?</Trans></h4>
+        <p >
+          <Trans>
+          As part of our affiliate network, you will be paid in a revenue share
+          based model. You earn a 30% commission on revenues made.</Trans>
+        </p>
+        <h4><Trans>When can I withdraw?</Trans></h4>
+        <div >
+          <ul>
+            <li>
+              <Trans>
+              You can withdraw your earnings once you have accumulated a minimum
+                of {currency} {VITE_REFERRAL_MIN_PAYOUT}.</Trans>
+            </li>
+            <li>
+              <Trans>
+              You can withdraw your earnings if 14 days have passed since your
+              last withdrawal.</Trans>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      React
+
+      Reply
+
+
+
+
+
+
+
+
     </>
   );
 }

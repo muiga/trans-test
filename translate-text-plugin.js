@@ -83,7 +83,7 @@ export default function translateTextPlugin(env) {
 
       const replaceWithTranslation = (_match, p1) => {
         const key = formatMalformedString(p1);
-        return formatMalformedString(translationMap[key]) || key
+        return translationMap[key]? formatMalformedString(translationMap[key]) : key
       };
 
       return code
