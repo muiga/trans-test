@@ -1,5 +1,11 @@
 import translations from "./src/locales/translations.json";
 
+/**
+ * TranslateTextPlugin is a Vite plugin that performs text translation in JavaScript/TypeScript files.
+ * It extracts translation keys from `<Trans>` tags and replaces them with their corresponding translations.
+ * @param {Object} env - The environment variables object.
+ * @returns {Object} - The Vite plugin object.
+ */
 export default function translateTextPlugin(env) {
   console.log("translating....");
 
@@ -25,7 +31,7 @@ export default function translateTextPlugin(env) {
     let continuousString = trimmedString.replace(/\n/g, " ");
 
     // Ensure proper spacing around HTML tags
-    continuousString.replace(/(\s?)(<[^>]*>)/g, ' $2').replace(/\s{2,}/g, ' ');
+    continuousString = continuousString.replace(/(\s?)(<[^>]*>)/g, ' $2').replace(/\s{2,}/g, ' ');
 
     // Remove unnecessary spaces around HTML tags
     continuousString = continuousString.replace(/{" "}/g, "");
@@ -37,9 +43,7 @@ export default function translateTextPlugin(env) {
     continuousString = continuousString.replace(/"/g, "'");
 
     // Ensure proper formatting of HTML tags
-    continuousString = continuousString.replace(/>\s+/g, '>').replace(/\s+</g, ' <')
-      .replace(/(?<!>)<\//g, ' </')
-      .replace(/(\w)\s*(<)/g, '$1 $2');
+    continuousString = continuousString.replace(/>\s+/g, '>').replace(/\s+</g, ' <').replace(/(?<!>)<\//g, ' </').replace(/(\w)\s*(<)/g, '$1 $2');
 
     return continuousString;
   };
@@ -47,19 +51,25 @@ export default function translateTextPlugin(env) {
   return {
     name: "translate-text-plugin",
     enforce: "pre",
+    /**
+     * Transforms the code by replacing translation keys with their corresponding translations.
+     * @param {string} code - The code to transform.
+     * @param {string} id - The file ID.
+     * @returns {string} - The transformed code.
+     */
     transform(code, id) {
-      const regex = /<Trans>([\s\S]*?)<\/Trans>/g;
-      const regex2 = /{?trans\("([^"]*)"\)}?/g;
+      const componentRegex = /<Trans>([\s\S]*?)<\/Trans>/g;
+      const functionRegex = /{?trans\("([^"]*)"\)}?/g;
 
       const extractedKeys = {};
 
       let match;
-      while ((match = regex.exec(code)) !== null) {
+      while ((match = componentRegex.exec(code)) !== null) {
         const key = formatMalformedString(match[1]);
         extractedKeys[key] = "";
       }
 
-      while ((match = regex2.exec(code)) !== null) {
+      while ((match = functionRegex.exec(code)) !== null) {
         const key = match[1].trim();
         extractedKeys[key] = "";
       }
@@ -73,16 +83,12 @@ export default function translateTextPlugin(env) {
 
       const replaceWithTranslation = (_match, p1) => {
         const key = formatMalformedString(p1);
-        const translation = formatMalformedString(translationMap[key]) || key;
-        console.log(translation)
-        return translation
+        return formatMalformedString(translationMap[key]) || key
       };
 
       return code
-        .replace(regex, replaceWithTranslation)
-        .replace(regex2, replaceWithTranslation);
+        .replace(componentRegex, replaceWithTranslation)
+        .replace(functionRegex, replaceWithTranslation);
     },
   };
 }
-
-
