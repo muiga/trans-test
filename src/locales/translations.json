@@ -1,0 +1,14 @@
+{
+  "sw": {
+    "Edit Vite + React": "Hariri Vite + React",
+    "count is": "hesabu ni",
+    "Click on the Vite and React logos to learn more": "Bonyeza kwenye logo za Vite na React kujifunza zaidi",
+    "Edit <code style={{ color: 'red' }}>src/App.tsx <span>3 <strong>goats </strong></span></code>and save to test <strong>HMR </strong>": "Hariri <code style={{ color: 'red' }}> src/App.tsx <span> 3 <strong>mbuzi</strong></span> </code> na uhifadhi ili kujaribu<strong>HMR</strong>"
+  },
+  "en": {
+    "Edit Vite + React": "Edit Vite + React",
+    "count is": "count is",
+    "Edit <code style={{ color: 'red' }}>src/App.tsx <span>3 <strong>goats </strong></span></code>and save to test <strong>HMR </strong>": "Edit <code style={{ color: 'red' }}> src/App.tsx <span> 3 <strong>goats</strong> </span> </code> and save to test <strong>HMR</strong>",
+    "Click on the Vite and React logos to learn more": "Click on the Vite and React logos to learn more"
+  }
+}
