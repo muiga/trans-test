@@ -6,21 +6,44 @@ export default function translateTextPlugin(env) {
   const locale = env["LOCALE"] || "en";
   const translationMap = translations[locale];
 
+  /**
+   * Formats a malformed string by performing the following operations:
+   * - Trims the string
+   * - Replaces newlines with spaces
+   * - Ensures proper spacing around HTML tags
+   * - Replaces double quotes with single quotes
+   * - Ensures proper formatting of HTML tags
+   *
+   * @param {string} inputString - The malformed string to format
+   * @returns {string} - The formatted string
+   */
   const formatMalformedString = (inputString) => {
+    // Trim the string
     let trimmedString = inputString.trim();
-    let continuousString = trimmedString.replace(/\n/g, " ");
-    continuousString.replace(/(\s?)(<[^>]*>)/g, ' $2').replace(/\s{2,}/g, ' ');
-    continuousString = continuousString.replace(/{" "}/g, "");
-    continuousString = continuousString.replace(/\s+/g, " ");
-    continuousString = continuousString.replace(/"/g, "'");
-    // Step 4: Ensure HTML tags are properly formatted (optional: further validation can be added here)
 
+    // Replace newlines with spaces
+    let continuousString = trimmedString.replace(/\n/g, " ");
+
+    // Ensure proper spacing around HTML tags
+    continuousString.replace(/(\s?)(<[^>]*>)/g, ' $2').replace(/\s{2,}/g, ' ');
+
+    // Remove unnecessary spaces around HTML tags
+    continuousString = continuousString.replace(/{" "}/g, "");
+
+    // Remove extra spaces
+    continuousString = continuousString.replace(/\s+/g, " ");
+
+    // Replace double quotes with single quotes
+    continuousString = continuousString.replace(/"/g, "'");
+
+    // Ensure proper formatting of HTML tags
     continuousString = continuousString.replace(/>\s+/g, '>').replace(/\s+</g, ' <')
       .replace(/(?<!>)<\//g, ' </')
       .replace(/(\w)\s*(<)/g, '$1 $2');
 
     return continuousString;
   };
+
   return {
     name: "translate-text-plugin",
     enforce: "pre",
