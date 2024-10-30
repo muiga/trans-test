@@ -47,7 +47,10 @@ function App() {
         {trans("Click on the Vite and React logos to learn more")}
       </p>
 
-      <div>
+      <div style={{
+        textAlign:'center',
+        maxWidth:'70ch'
+      }}>
         <h4> <Trans>what is betkumi affiliate program</Trans></h4>
         <p ><Trans>
           BetKumi Affiliates is a program where we give you the opportunity to earn
@@ -83,18 +86,6 @@ function App() {
           </ul>
         </div>
       </div>
-
-      React
-
-      Reply
-
-
-
-
-
-
-
-
     </>
   );
 }

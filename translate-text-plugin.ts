@@ -1,31 +1,16 @@
+import {PluginOption} from 'vite'
 import translations from "./src/locales/translations.json";
 
-/**
- * TranslateTextPlugin is a Vite plugin that performs text translation in JavaScript/TypeScript files.
- * It extracts translation keys from `<Trans>` tags and replaces them with their corresponding translations.
- * @param {Object} env - The environment variables object.
- * @returns {Object} - The Vite plugin object.
- */
-export default function translateTextPlugin(env) {
+export default function translateTextPlugin(env: { [key: string]: string }): PluginOption {
   console.log("translating....");
 
-  const locale = env["LOCALE"] || "en";
-  const translationMap = translations[locale];
+  const locale = (env["LOCALE"] || "en")as keyof typeof translations
+  const translationMap:Record<string, string> = translations[locale ];
 
-  /**
-   * Formats a malformed string by performing the following operations:
-   * - Trims the string
-   * - Replaces newlines with spaces
-   * - Ensures proper spacing around HTML tags
-   * - Replaces double quotes with single quotes
-   * - Ensures proper formatting of HTML tags
-   *
-   * @param {string} inputString - The malformed string to format
-   * @returns {string} - The formatted string
-   */
-  const formatMalformedString = (inputString) => {
+
+  const formatMalformedString = (inputString: string): string => {
     // Trim the string
-    let trimmedString = inputString.trim();
+    const trimmedString = inputString.trim();
 
     // Replace newlines with spaces
     let continuousString = trimmedString.replace(/\n/g, " ");
@@ -51,17 +36,11 @@ export default function translateTextPlugin(env) {
   return {
     name: "translate-text-plugin",
     enforce: "pre",
-    /**
-     * Transforms the code by replacing translation keys with their corresponding translations.
-     * @param {string} code - The code to transform.
-     * @param {string} id - The file ID.
-     * @returns {string} - The transformed code.
-     */
-    transform(code, id) {
+    transform(code: string): string {
       const componentRegex = /<Trans>([\s\S]*?)<\/Trans>/g;
       const functionRegex = /{?trans\("([^"]*)"\)}?/g;
 
-      const extractedKeys = {};
+      const extractedKeys: { [key: string]: string } = {};
 
       let match;
       while ((match = componentRegex.exec(code)) !== null) {
@@ -81,9 +60,9 @@ export default function translateTextPlugin(env) {
         throw new Error(`Aborting build due to Missing translation for [${missingKeys.join(", ")}]`);
       }
 
-      const replaceWithTranslation = (_match, p1) => {
-        const key = formatMalformedString(p1);
-        return translationMap[key]? formatMalformedString(translationMap[key]) : key
+      const replaceWithTranslation = (_match: string, p1: string): string => {
+        const key = formatMalformedString(p1)
+        return translationMap[key] ? formatMalformedString(translationMap[key]) : key;
       };
 
       return code

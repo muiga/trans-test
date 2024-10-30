@@ -36,7 +36,7 @@ const processFiles = (directory) => {
     }
 
     while ((match = regex2.exec(content)) !== null) {
-      const key = match[1].trim();
+      const key = formatMalformedString(match[1])
       extractedKeys[key] = "";
     }
   });
