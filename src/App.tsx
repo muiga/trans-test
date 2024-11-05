@@ -75,8 +75,7 @@ function App() {
           <ul>
             <li>
               <Trans>
-              You can withdraw your earnings once you have accumulated a minimum
-                of {currency} {VITE_REFERRAL_MIN_PAYOUT}.</Trans>
+              You can withdraw your earnings once you have accumulated a minimum of {currency} {VITE_REFERRAL_MIN_PAYOUT}.</Trans>
             </li>
             <li>
               <Trans>

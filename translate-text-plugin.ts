@@ -1,10 +1,15 @@
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import {parseAst, PluginOption} from 'vite';
+import { PluginOption} from 'vite';
 import translations from "./src/locales/translations.json";
+import * as babelParser from "@babel/parser";
+import _babelGenerator from "@babel/generator";
+import _traverse from "@babel/traverse";
+import * as babelTypes from '@babel/types';
 
 type CustomAny = any
 
+const generator = _babelGenerator.default
+const traverse = _traverse.default;
 
 export default function translateTextPlugin(env: { [key: string]: string }): PluginOption {
   // console.log("translating....");
@@ -24,144 +29,112 @@ export default function translateTextPlugin(env: { [key: string]: string }): Plu
     }
 
 
-  // const formatMalformedString = (inputString: string): string => {
-  //   // Trim the string
-  //   const trimmedString = inputString.trim();
-  //
-  //   // Replace newlines with spaces
-  //   let continuousString = trimmedString.replace(/\n/g, " ");
-  //
-  //   // Ensure proper spacing around HTML tags
-  //   continuousString = continuousString.replace(/(\s?)(<[^>]*>)/g, ' $2').replace(/\s{2,}/g, ' ');
-  //
-  //   // Remove unnecessary spaces around HTML tags
-  //   continuousString = continuousString.replace(/{" "}/g, "");
-  //
-  //   // Remove extra spaces
-  //   continuousString = continuousString.replace(/\s+/g, " ");
-  //
-  //   // Replace double quotes with single quotes
-  //   continuousString = continuousString.replace(/"/g, "'");
-  //
-  //   // Ensure proper formatting of HTML tags
-  //   continuousString = continuousString.replace(/>\s+/g, '>').replace(/\s+</g, ' <').replace(/(?<!>)<\//g, ' </').replace(/(\w)\s*(<)/g, '$1 $2');
-  //
-  //   return continuousString;
-  // };
 
   return {
     name: "translate-text-plugin",
     enforce: "post",
     transform(code: string,id:string): string {
 
-      if(/App/.test(id)){
-        console.log('id::', id)
+      if (!id.endsWith('.ts') && !id.endsWith('.tsx') || id.endsWith('main.tsx')) {
+        return code;
       }
+      //  log ast
+      // const ast= parseAst(code)
 
-      const ast= parseAst(code)
-      // console.dir(ast,{depth:Infinity});
+      const ast = babelParser.parse(code,{
+        sourceType: 'module',
+        plugins: [
+          'jsx',
+          'typescript',
+        ],
+      })
 
-      const findIdentifiersWithName = (ast:CustomAny, name:string) => {
-        const identifiers:CustomAny[] = [];
+
+      // console.dir(ast,{depth:Infinity})
 
 
+      traverse(ast, {
+        // Babel visitor to look for "Identifier" nodes with name "Trans"
+        Identifier(path:CustomAny) {
+          if (path.node.name === 'Trans') {
+            const parent = path.findParent((p:CustomAny) => p.isCallExpression());
+            if (parent) {
+              const content = parent.node.arguments[1];
 
-        const traverse = (node:CustomAny, parent:CustomAny) => {
-          if (!node) return;
+              // Check if the second argument is an ObjectExpression and contains 'children'
+              if (babelTypes.isObjectExpression(content)) {
+                const childrenProp = content.properties.find(
+                    (prop) => babelTypes.isObjectProperty(prop) && 'name' in prop.key && prop.key.name === 'children'
+                );
 
-          // Check if the current node is an Identifier with the specified name
-          if (node.type === 'Identifier' && node.name === name) {
-            // If the parent is a CallExpression or similar, push its arguments
-            if (parent && parent.type === 'CallExpression') {
-              identifiers.push(parent.arguments
-              );
-            }
-          }
+                console.dir(childrenProp, {depth:Infinity})
 
-          // Traverse the body if it exists
-          if (Array.isArray(node.body)) {
-            node.body.forEach((child:CustomAny) => traverse(child, node));
-          }
+                if (childrenProp && 'value' in childrenProp ) {
 
-          // Traverse child nodes based on their types
-          for (const key in node) {
-            if (Object.prototype.hasOwnProperty.call(node, key)) {
-              const child = node[key];
-              if (Array.isArray(child)) {
-                child.forEach(childNode => traverse(childNode, node));
-              } else if (typeof child === 'object' && child !== null) {
-                traverse(child, node);
+                  if( babelTypes.isStringLiteral(childrenProp.value)) {
+                    const stringToTranslate = childrenProp.value.value;
+
+                    // Perform translation if found in the map
+                    const newString = translationMap[stringToTranslate] || stringToTranslate;
+
+                    // Update the value with the translated string
+                    childrenProp.value = babelTypes.stringLiteral(newString);
+
+                    // You can also modify the raw property for further adjustments if needed
+                    childrenProp.value.extra = {
+                      rawValue: newString,
+                      raw: `"${newString}"`,
+                    };
+                  }
+
+                  if( babelTypes.isArrayExpression(childrenProp.value) && childrenProp.value.elements) {
+                    childrenProp.value.elements.forEach((element) => {
+                      if (babelTypes.isStringLiteral(element) && !!element.value) {
+                        const stringToTranslate = element.value;
+                        // Perform translation if found in the map
+                        const newString = translationMap[stringToTranslate] || stringToTranslate;
+                        // Update the value with the translated string
+                        element.value = newString;
+                        // You can also modify the raw property for further adjustments if needed
+                        element.extra = {
+                          rawValue: newString,
+                          raw: `"${newString}"`,
+                        };
+                      }
+                    })
+
+                  }
+                }
               }
             }
           }
+        },
+        CallExpression(path:CustomAny) {
+          // Check if the function called is named "trans"
+          if (path.node.callee.name === 'trans') {
+            const content= path.node.arguments[0];
+              if ( 'value' in content) {
+                 const stringToTranslate = content.value;
+                 // Perform translation if found in the map
+                 const newString = translationMap[stringToTranslate] || stringToTranslate;
+
+                 // Update the value with the translated string
+                 content.value = newString;
+                 // You can also modify the raw property for further adjustments if needed
+                 content.extra = {
+                   rawValue: newString,
+                   raw: `"${newString}"`,
+                 };
+               }
+          }
         }
+      });
 
-        traverse(ast, null);
 
 
-        const filterUniqueIdentifiers = (identifiers:CustomAny[]) => {
-           const seen = new Set();
-              return identifiers.filter((identifier:CustomAny[]) => {
-                const key = `${identifier[0].start}-${identifier[0].end}`;
-                if (seen.has(key)) {
-                  return false; // Duplicate found
-                }
-                seen.add(key); // Mark this identifier as seen
-                return true; // Keep it
-           });
-        };
+      return generator(ast).code;
 
-        return filterUniqueIdentifiers(identifiers)
-      }
 
-if(
-    findIdentifiersWithName(ast,'Trans')
-){
-  // console.log()
-}
-      // console.dir(findIdentifiersWithName(ast,'Trans'),{depth:Infinity});
-
-      // const MyVisitor = {
-      //   Identifier() {
-      //     console.log("Called!");
-      //   }
-      // };
-      //
-      // traverse(ast, MyVisitor)
-
-      // const componentRegex = /<Trans>([\s\S]*?)<\/Trans>/g;
-      // const functionRegex = /{?trans\("([^"]*)"\)}?/g;
-      //
-      // const extractedKeys: { [key: string]: string } = {};
-      //
-      // let match;
-      // while ((match = componentRegex.exec(code)) !== null) {
-      //   const key = formatMalformedString(match[1]);
-      //   extractedKeys[key] = "";
-      // }
-      //
-      // while ((match = functionRegex.exec(code)) !== null) {
-      //   const key = match[1].trim();
-      //   extractedKeys[key] = "";
-      // }
-      //
-      // const foundKeys = Object.keys(extractedKeys);
-      // const missingKeys = foundKeys.filter((key) => translationMap[key] === undefined);
-      // if (missingKeys.length > 0) {
-      //   console.log(`Missing translations for ${missingKeys.join(", ")}`);
-      //   throw new Error(`Aborting build due to Missing translation for [${missingKeys.join(", ")}]`);
-      // }
-      //
-      // const replaceWithTranslation = (_match: string, p1: string): string => {
-      //   const key = formatMalformedString(p1)
-      //   return translationMap[key] ? formatMalformedString(translationMap[key]) : key;
-      // };
-      //
-      // return code
-      //   .replace(componentRegex, replaceWithTranslation)
-      //   .replace(functionRegex, replaceWithTranslation);
-
-      return code
     },
   };
 }
