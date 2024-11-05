@@ -5,8 +5,486 @@
 vite v5.4.10 building for production...
 transforming...
 GOT TO  PLUGIN:: /home/muiga/Dev/Work/translation/src/App.tsx
-Edit <code>src/App.tsx <span>3 <strong>goats </strong></span></code>and save to test <strong>HMR </strong>
-You can withdraw your earnings once you have accumulated a minimum of
+Found trans call at: [
+  Node {
+    type: 'StringLiteral',
+    start: 689,
+    end: 708,
+    loc: SourceLocation {
+      start: [Position],
+      end: [Position],
+      filename: undefined,
+      identifierName: undefined
+    },
+    extra: { rawValue: 'Edit Vite + React', raw: '"Edit Vite + React"' },
+    value: 'Edit Vite + React'
+  }
+]
+Found trans call at: [
+  Node {
+    type: 'StringLiteral',
+    start: 844,
+    end: 854,
+    loc: SourceLocation {
+      start: [Position],
+      end: [Position],
+      filename: undefined,
+      identifierName: undefined
+    },
+    extra: { rawValue: 'count is', raw: '"count is"' },
+    value: 'count is'
+  }
+]
+Found trans call at: [
+  Node {
+    type: 'StringLiteral',
+    start: 1288,
+    end: 1337,
+    loc: SourceLocation {
+      start: [Position],
+      end: [Position],
+      filename: undefined,
+      identifierName: undefined
+    },
+    extra: {
+      rawValue: 'Click on the Vite and React logos to learn more',
+      raw: '"Click on the Vite and React logos to learn more"'
+    },
+    value: 'Click on the Vite and React logos to learn more'
+  }
+]
+Found trans call at: [
+  Node {
+    type: 'StringLiteral',
+    start: 689,
+    end: 708,
+    loc: SourceLocation {
+      start: [Position],
+      end: [Position],
+      filename: undefined,
+      identifierName: undefined
+    },
+    extra: { rawValue: 'Edit Vite + React', raw: '"Edit Vite + React"' },
+    value: 'Edit Vite + React'
+  }
+]
+Found trans call at: [
+  Node {
+    type: 'StringLiteral',
+    start: 844,
+    end: 854,
+    loc: SourceLocation {
+      start: [Position],
+      end: [Position],
+      filename: undefined,
+      identifierName: undefined
+    },
+    extra: { rawValue: 'count is', raw: '"count is"' },
+    value: 'count is'
+  }
+]
+Found trans call at: [
+  Node {
+    type: 'StringLiteral',
+    start: 1288,
+    end: 1337,
+    loc: SourceLocation {
+      start: [Position],
+      end: [Position],
+      filename: undefined,
+      identifierName: undefined
+    },
+    extra: {
+      rawValue: 'Click on the Vite and React logos to learn more',
+      raw: '"Click on the Vite and React logos to learn more"'
+    },
+    value: 'Click on the Vite and React logos to learn more'
+  }
+]
+Found trans call at: [
+  Node {
+    type: 'StringLiteral',
+    start: 689,
+    end: 708,
+    loc: SourceLocation {
+      start: [Position],
+      end: [Position],
+      filename: undefined,
+      identifierName: undefined
+    },
+    extra: { rawValue: 'Edit Vite + React', raw: '"Edit Vite + React"' },
+    value: 'Edit Vite + React'
+  }
+]
+Found trans call at: [
+  Node {
+    type: 'StringLiteral',
+    start: 844,
+    end: 854,
+    loc: SourceLocation {
+      start: [Position],
+      end: [Position],
+      filename: undefined,
+      identifierName: undefined
+    },
+    extra: { rawValue: 'count is', raw: '"count is"' },
+    value: 'count is'
+  }
+]
+Found trans call at: [
+  Node {
+    type: 'StringLiteral',
+    start: 1288,
+    end: 1337,
+    loc: SourceLocation {
+      start: [Position],
+      end: [Position],
+      filename: undefined,
+      identifierName: undefined
+    },
+    extra: {
+      rawValue: 'Click on the Vite and React logos to learn more',
+      raw: '"Click on the Vite and React logos to learn more"'
+    },
+    value: 'Click on the Vite and React logos to learn more'
+  }
+]
+Found trans call at: [
+  Node {
+    type: 'StringLiteral',
+    start: 689,
+    end: 708,
+    loc: SourceLocation {
+      start: [Position],
+      end: [Position],
+      filename: undefined,
+      identifierName: undefined
+    },
+    extra: { rawValue: 'Edit Vite + React', raw: '"Edit Vite + React"' },
+    value: 'Edit Vite + React'
+  }
+]
+Found trans call at: [
+  Node {
+    type: 'StringLiteral',
+    start: 844,
+    end: 854,
+    loc: SourceLocation {
+      start: [Position],
+      end: [Position],
+      filename: undefined,
+      identifierName: undefined
+    },
+    extra: { rawValue: 'count is', raw: '"count is"' },
+    value: 'count is'
+  }
+]
+Found trans call at: [
+  Node {
+    type: 'StringLiteral',
+    start: 1288,
+    end: 1337,
+    loc: SourceLocation {
+      start: [Position],
+      end: [Position],
+      filename: undefined,
+      identifierName: undefined
+    },
+    extra: {
+      rawValue: 'Click on the Vite and React logos to learn more',
+      raw: '"Click on the Vite and React logos to learn more"'
+    },
+    value: 'Click on the Vite and React logos to learn more'
+  }
+]
+Found trans call at: [
+  Node {
+    type: 'StringLiteral',
+    start: 689,
+    end: 708,
+    loc: SourceLocation {
+      start: [Position],
+      end: [Position],
+      filename: undefined,
+      identifierName: undefined
+    },
+    extra: { rawValue: 'Edit Vite + React', raw: '"Edit Vite + React"' },
+    value: 'Edit Vite + React'
+  }
+]
+Found trans call at: [
+  Node {
+    type: 'StringLiteral',
+    start: 844,
+    end: 854,
+    loc: SourceLocation {
+      start: [Position],
+      end: [Position],
+      filename: undefined,
+      identifierName: undefined
+    },
+    extra: { rawValue: 'count is', raw: '"count is"' },
+    value: 'count is'
+  }
+]
+Found trans call at: [
+  Node {
+    type: 'StringLiteral',
+    start: 1288,
+    end: 1337,
+    loc: SourceLocation {
+      start: [Position],
+      end: [Position],
+      filename: undefined,
+      identifierName: undefined
+    },
+    extra: {
+      rawValue: 'Click on the Vite and React logos to learn more',
+      raw: '"Click on the Vite and React logos to learn more"'
+    },
+    value: 'Click on the Vite and React logos to learn more'
+  }
+]
+Found trans call at: [
+  Node {
+    type: 'StringLiteral',
+    start: 689,
+    end: 708,
+    loc: SourceLocation {
+      start: [Position],
+      end: [Position],
+      filename: undefined,
+      identifierName: undefined
+    },
+    extra: { rawValue: 'Edit Vite + React', raw: '"Edit Vite + React"' },
+    value: 'Edit Vite + React'
+  }
+]
+Found trans call at: [
+  Node {
+    type: 'StringLiteral',
+    start: 844,
+    end: 854,
+    loc: SourceLocation {
+      start: [Position],
+      end: [Position],
+      filename: undefined,
+      identifierName: undefined
+    },
+    extra: { rawValue: 'count is', raw: '"count is"' },
+    value: 'count is'
+  }
+]
+Found trans call at: [
+  Node {
+    type: 'StringLiteral',
+    start: 1288,
+    end: 1337,
+    loc: SourceLocation {
+      start: [Position],
+      end: [Position],
+      filename: undefined,
+      identifierName: undefined
+    },
+    extra: {
+      rawValue: 'Click on the Vite and React logos to learn more',
+      raw: '"Click on the Vite and React logos to learn more"'
+    },
+    value: 'Click on the Vite and React logos to learn more'
+  }
+]
+Found trans call at: [
+  Node {
+    type: 'StringLiteral',
+    start: 689,
+    end: 708,
+    loc: SourceLocation {
+      start: [Position],
+      end: [Position],
+      filename: undefined,
+      identifierName: undefined
+    },
+    extra: { rawValue: 'Edit Vite + React', raw: '"Edit Vite + React"' },
+    value: 'Edit Vite + React'
+  }
+]
+Found trans call at: [
+  Node {
+    type: 'StringLiteral',
+    start: 844,
+    end: 854,
+    loc: SourceLocation {
+      start: [Position],
+      end: [Position],
+      filename: undefined,
+      identifierName: undefined
+    },
+    extra: { rawValue: 'count is', raw: '"count is"' },
+    value: 'count is'
+  }
+]
+Found trans call at: [
+  Node {
+    type: 'StringLiteral',
+    start: 1288,
+    end: 1337,
+    loc: SourceLocation {
+      start: [Position],
+      end: [Position],
+      filename: undefined,
+      identifierName: undefined
+    },
+    extra: {
+      rawValue: 'Click on the Vite and React logos to learn more',
+      raw: '"Click on the Vite and React logos to learn more"'
+    },
+    value: 'Click on the Vite and React logos to learn more'
+  }
+]
+Found trans call at: [
+  Node {
+    type: 'StringLiteral',
+    start: 689,
+    end: 708,
+    loc: SourceLocation {
+      start: [Position],
+      end: [Position],
+      filename: undefined,
+      identifierName: undefined
+    },
+    extra: { rawValue: 'Edit Vite + React', raw: '"Edit Vite + React"' },
+    value: 'Edit Vite + React'
+  }
+]
+Found trans call at: [
+  Node {
+    type: 'StringLiteral',
+    start: 844,
+    end: 854,
+    loc: SourceLocation {
+      start: [Position],
+      end: [Position],
+      filename: undefined,
+      identifierName: undefined
+    },
+    extra: { rawValue: 'count is', raw: '"count is"' },
+    value: 'count is'
+  }
+]
+Found trans call at: [
+  Node {
+    type: 'StringLiteral',
+    start: 1288,
+    end: 1337,
+    loc: SourceLocation {
+      start: [Position],
+      end: [Position],
+      filename: undefined,
+      identifierName: undefined
+    },
+    extra: {
+      rawValue: 'Click on the Vite and React logos to learn more',
+      raw: '"Click on the Vite and React logos to learn more"'
+    },
+    value: 'Click on the Vite and React logos to learn more'
+  }
+]
+Found trans call at: [
+  Node {
+    type: 'StringLiteral',
+    start: 689,
+    end: 708,
+    loc: SourceLocation {
+      start: [Position],
+      end: [Position],
+      filename: undefined,
+      identifierName: undefined
+    },
+    extra: { rawValue: 'Edit Vite + React', raw: '"Edit Vite + React"' },
+    value: 'Edit Vite + React'
+  }
+]
+Found trans call at: [
+  Node {
+    type: 'StringLiteral',
+    start: 844,
+    end: 854,
+    loc: SourceLocation {
+      start: [Position],
+      end: [Position],
+      filename: undefined,
+      identifierName: undefined
+    },
+    extra: { rawValue: 'count is', raw: '"count is"' },
+    value: 'count is'
+  }
+]
+Found trans call at: [
+  Node {
+    type: 'StringLiteral',
+    start: 1288,
+    end: 1337,
+    loc: SourceLocation {
+      start: [Position],
+      end: [Position],
+      filename: undefined,
+      identifierName: undefined
+    },
+    extra: {
+      rawValue: 'Click on the Vite and React logos to learn more',
+      raw: '"Click on the Vite and React logos to learn more"'
+    },
+    value: 'Click on the Vite and React logos to learn more'
+  }
+]
+Found trans call at: [
+  Node {
+    type: 'StringLiteral',
+    start: 689,
+    end: 708,
+    loc: SourceLocation {
+      start: [Position],
+      end: [Position],
+      filename: undefined,
+      identifierName: undefined
+    },
+    extra: { rawValue: 'Edit Vite + React', raw: '"Edit Vite + React"' },
+    value: 'Edit Vite + React'
+  }
+]
+Found trans call at: [
+  Node {
+    type: 'StringLiteral',
+    start: 844,
+    end: 854,
+    loc: SourceLocation {
+      start: [Position],
+      end: [Position],
+      filename: undefined,
+      identifierName: undefined
+    },
+    extra: { rawValue: 'count is', raw: '"count is"' },
+    value: 'count is'
+  }
+]
+Found trans call at: [
+  Node {
+    type: 'StringLiteral',
+    start: 1288,
+    end: 1337,
+    loc: SourceLocation {
+      start: [Position],
+      end: [Position],
+      filename: undefined,
+      identifierName: undefined
+    },
+    extra: {
+      rawValue: 'Click on the Vite and React logos to learn more',
+      raw: '"Click on the Vite and React logos to learn more"'
+    },
+    value: 'Click on the Vite and React logos to learn more'
+  }
+]
 GOT TO  PLUGIN:: /home/muiga/Dev/Work/translation/src/utils/translate.ts
 GOT TO  PLUGIN:: /home/muiga/Dev/Work/translation/src/components/Trans.tsx
 ✓ 36 modules transformed.
@@ -15,5 +493,5 @@ computing gzip size...
 dist/index.html                   0.46 kB │ gzip:  0.30 kB
 dist/assets/react-CHdo91hT.svg    4.13 kB │ gzip:  2.14 kB
 dist/assets/index-n_ryQ3BS.css    1.39 kB │ gzip:  0.72 kB
-dist/assets/index-htRGEsB_.js   143.42 kB │ gzip: 46.18 kB
-✓ built in 1.96s
+dist/assets/index-Dc5af5U1.js   143.46 kB │ gzip: 46.21 kB
+✓ built in 1.68s

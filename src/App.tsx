@@ -33,12 +33,12 @@ function App() {
         <p>
           <Trans>
             Edit{" "}
-            <code style={{ color: "red" }}>
+            <a style={{ color: "red" }} href={'https://www.google.com/'}>
               src/App.tsx{" "}
               <span>
                 3 <strong>goats </strong>
               </span>
-            </code>
+            </a>
             and save to test <strong>HMR</strong>
           </Trans>
         </p>
