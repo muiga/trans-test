@@ -32,11 +32,11 @@ function App() {
         </button>
         <p>
           <Trans>
-            Edit
+            Edit{" "}
             <code style={{ color: "red" }}>
               src/App.tsx{" "}
               <span>
-                3 <strong>goats</strong>
+                3 <strong>goats </strong>
               </span>
             </code>
             and save to test <strong>HMR</strong>

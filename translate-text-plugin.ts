@@ -32,14 +32,21 @@ export default function translateTextPlugin(env: { [key: string]: string }): Plu
 
   return {
     name: "translate-text-plugin",
-    enforce: "post",
+    enforce: "pre",
     transform(code: string,id:string): string {
+
+
 
       if (!id.endsWith('.ts') && !id.endsWith('.tsx') || id.endsWith('main.tsx')) {
         return code;
       }
+
+
+      console.log('GOT TO  PLUGIN::',id)
       //  log ast
       // const ast= parseAst(code)
+
+
 
       const ast = babelParser.parse(code,{
         sourceType: 'module',
@@ -49,8 +56,11 @@ export default function translateTextPlugin(env: { [key: string]: string }): Plu
         ],
       })
 
+      if(/App.tsx/.test(id)){
+        console.dir(ast,{depth:Infinity})
+      }
 
-      // console.dir(ast,{depth:Infinity})
+
 
 
       traverse(ast, {
@@ -61,13 +71,15 @@ export default function translateTextPlugin(env: { [key: string]: string }): Plu
             if (parent) {
               const content = parent.node.arguments[1];
 
+              console.log(generator(parent.node).code)
+
               // Check if the second argument is an ObjectExpression and contains 'children'
               if (babelTypes.isObjectExpression(content)) {
                 const childrenProp = content.properties.find(
                     (prop) => babelTypes.isObjectProperty(prop) && 'name' in prop.key && prop.key.name === 'children'
                 );
 
-                console.dir(childrenProp, {depth:Infinity})
+                // console.dir(childrenProp, {depth:Infinity})
 
                 if (childrenProp && 'value' in childrenProp ) {
 
@@ -90,9 +102,9 @@ export default function translateTextPlugin(env: { [key: string]: string }): Plu
                   if( babelTypes.isArrayExpression(childrenProp.value) && childrenProp.value.elements) {
                     childrenProp.value.elements.forEach((element) => {
                       if (babelTypes.isStringLiteral(element) && !!element.value) {
-                        const stringToTranslate = element.value;
+                        const stringToTranslate = element.value.trimEnd();
                         // Perform translation if found in the map
-                        const newString = translationMap[stringToTranslate] || stringToTranslate;
+                        const newString = (translationMap[stringToTranslate] || stringToTranslate) + " ";
                         // Update the value with the translated string
                         element.value = newString;
                         // You can also modify the raw property for further adjustments if needed
@@ -117,7 +129,6 @@ export default function translateTextPlugin(env: { [key: string]: string }): Plu
                  const stringToTranslate = content.value;
                  // Perform translation if found in the map
                  const newString = translationMap[stringToTranslate] || stringToTranslate;
-
                  // Update the value with the translated string
                  content.value = newString;
                  // You can also modify the raw property for further adjustments if needed
