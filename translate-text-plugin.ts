@@ -56,90 +56,185 @@ export default function translateTextPlugin(env: { [key: string]: string }): Plu
         ],
       })
 
-      if(/App.tsx/.test(id)){
-        console.dir(ast,{depth:Infinity})
-      }
-
-
+      const allTransComponents:CustomAny[] =[]
+      const allTransComponentsString:string[][] =[]
 
 
       traverse(ast, {
-        // Babel visitor to look for "Identifier" nodes with name "Trans"
-        Identifier(path:CustomAny) {
-          if (path.node.name === 'Trans') {
-            const parent = path.findParent((p:CustomAny) => p.isCallExpression());
-            if (parent) {
-              const content = parent.node.arguments[1];
-
-              console.log(generator(parent.node).code)
-
-              // Check if the second argument is an ObjectExpression and contains 'children'
-              if (babelTypes.isObjectExpression(content)) {
-                const childrenProp = content.properties.find(
-                    (prop) => babelTypes.isObjectProperty(prop) && 'name' in prop.key && prop.key.name === 'children'
-                );
-
-                // console.dir(childrenProp, {depth:Infinity})
-
-                if (childrenProp && 'value' in childrenProp ) {
-
-                  if( babelTypes.isStringLiteral(childrenProp.value)) {
-                    const stringToTranslate = childrenProp.value.value;
-
-                    // Perform translation if found in the map
-                    const newString = translationMap[stringToTranslate] || stringToTranslate;
-
-                    // Update the value with the translated string
-                    childrenProp.value = babelTypes.stringLiteral(newString);
-
-                    // You can also modify the raw property for further adjustments if needed
-                    childrenProp.value.extra = {
-                      rawValue: newString,
-                      raw: `"${newString}"`,
-                    };
-                  }
-
-                  if( babelTypes.isArrayExpression(childrenProp.value) && childrenProp.value.elements) {
-                    childrenProp.value.elements.forEach((element) => {
-                      if (babelTypes.isStringLiteral(element) && !!element.value) {
-                        const stringToTranslate = element.value.trimEnd();
-                        // Perform translation if found in the map
-                        const newString = (translationMap[stringToTranslate] || stringToTranslate) + " ";
-                        // Update the value with the translated string
-                        element.value = newString;
-                        // You can also modify the raw property for further adjustments if needed
-                        element.extra = {
-                          rawValue: newString,
-                          raw: `"${newString}"`,
-                        };
-                      }
-                    })
-
-                  }
-                }
-              }
-            }
-          }
+        JSXElement(path:CustomAny) {
+          if (path.node.openingElement.name.name === 'Trans') {
+            allTransComponents.push(path.node)}
         },
-        CallExpression(path:CustomAny) {
-          // Check if the function called is named "trans"
-          if (path.node.callee.name === 'trans') {
-            const content= path.node.arguments[0];
-              if ( 'value' in content) {
-                 const stringToTranslate = content.value;
-                 // Perform translation if found in the map
-                 const newString = translationMap[stringToTranslate] || stringToTranslate;
-                 // Update the value with the translated string
-                 content.value = newString;
-                 // You can also modify the raw property for further adjustments if needed
-                 content.extra = {
-                   rawValue: newString,
-                   raw: `"${newString}"`,
-                 };
-               }
-          }
-        }
       });
+
+
+
+      const createStringFromNode= (content:CustomAny[])=>{
+        const strArr:string[] = []
+        content.forEach((node:CustomAny)=>{
+
+          if( babelTypes.isJSXText(node)){
+            const text = node.value.replace(/\s+/g, ' ').trim()
+            strArr.push(text)
+          } else if(babelTypes.isJSXElement(node)){
+            const children = node.children
+            const el ='name' in node.openingElement.name && node.openingElement.name.name
+            let cEl;
+            if((node.closingElement && 'name' in node.closingElement.name)){
+              cEl = node.closingElement.name.name
+            }
+
+            const str = createStringFromNode(children)
+
+            let newStr:string[] = []
+            if(el &&  typeof el ==='string' && cEl &&  typeof cEl ==='string'){
+              newStr = [`<${el}>`, ...str, `</${cEl}>`]
+            } else{
+               newStr = [...str]
+            }
+            strArr.push(...newStr)
+          }else{
+            strArr.push('')
+          }
+
+        });
+
+        return strArr
+      }
+
+      allTransComponents.forEach((node:CustomAny)=>{
+          const content:CustomAny[] = node.children
+        const str = createStringFromNode(content)
+
+        if(content.length === 1 && babelTypes.isJSXText(content[0])){
+          allTransComponentsString.push(str)
+        }else{
+          allTransComponentsString.push(str)
+          //   work with  complex nodes
+
+        }
+
+      })
+
+      const parseStringToArray = (inputString:string):string[] =>{
+        const regex = /(<[^>]+>|[^<]+)/g;
+        const matches = inputString.match(regex);
+        const result:string[] = [];
+
+
+       if(matches) matches.forEach((match) => {
+          if (match.startsWith('<')) {
+            result.push(match);  // push the HTML tag itself
+          } else {
+            result.push(match.trim());  // push the text content
+          }
+        });
+
+        return result;
+      }
+
+
+      allTransComponentsString.forEach((str,index)=>{
+        const newStrArr = str.filter(txt => txt.trim() !== '');
+        let stringToTrans:string;
+        if(str.length === 1){
+          stringToTrans = str.join(' ').trim()
+        }else{
+          const newStrArr:string[] = str[str.length - 1] === '.' ? str.slice(0, -1) : str;
+          stringToTrans = newStrArr.join(' ').replace(/\s+/g, ' ').replace(/\s*>\s*/g, '>').trim()
+        }
+        const newString = translationMap[stringToTrans] || stringToTrans;
+
+        const currentNode = allTransComponents[index]
+        traverse(ast, {
+          JSXElement(path:CustomAny) {
+            if (path.node.start === currentNode.start && path.node.end === currentNode.end) {
+             const content:CustomAny[] = path.node.children;
+             if(content.length === 1 && babelTypes.isJSXText(content[0])){
+               content[0].value = newString;
+               content[0].extra = {
+                 rawValue: newString,
+                 raw: `${newString}`,
+               };
+             }else{
+               const transArr = parseStringToArray(newString)
+               const findAndTranslate = (parentNode:CustomAny)=> {
+                 // Iterate over the child nodes of the parent node
+                 parentNode.children.forEach((child:CustomAny) => {
+                   if (child.type === 'JSXText') {
+                   // replace if found
+                     const text= child.value.replace(/\s+/g, ' ').trim()
+
+                     if(text && typeof text === 'string'){
+                       const index = newStrArr.indexOf(text)
+                       if(index !== -1 && transArr[index]){
+                       // wait
+                         const val =transArr[index]+" "
+                         child.value = val;
+                         child.extra = {
+                           rawValue: val,
+                           raw: `${val}`,
+                         };
+                       }
+                     }
+
+                   }
+
+                   // If the child is a JSXElement, recurse into its children
+                   if (child.type === 'JSXElement') {
+                     findAndTranslate(child) // Recurse
+                   }
+                 });
+
+               }
+
+               findAndTranslate(path.node);
+
+
+             //   complex nodes
+             }
+            }
+          },
+        });
+
+      })
+
+      // traverse(ast, {
+      //   JSXElement(path:CustomAny) {
+      //     if (path.node.openingElement.name.name === 'Trans') {
+      //       allTransComponents.push(path.node)
+      //       const content: CustomAny[] = path.node.children;
+      //
+      //       // console.log('length:;', content.length, content)
+      //       const str = createStringFromNode(content)
+      //
+      //       if(content.length === 1 && babelTypes.isJSXText(content[0])){
+      //         const stringToTranslate = str.join(' ').trim()
+      //         const newString = translationMap[stringToTranslate] || stringToTranslate;
+      //           content[0].value = newString;
+      //           content[0].extra = {
+      //             rawValue: newString,
+      //             raw: `${newString}`,
+      //           };
+      //       }else{
+      //
+      //         content.forEach((_,i)=>{
+      //           const newStrArr:string[] = str[str.length - 1] === '.' ? str.slice(0, -1) : str;
+      //           console.log(`str::${i}`, newStrArr.join(' ').replace(/\s+/g, ' ').replace(/\s*>\s*/g, '>').trim())
+      //         })
+      //       //   work with  complex nodes
+      //
+      //       }
+      //
+      //     }
+      //   }
+      // });
+      //
+      // console.log('allNodes::', allTransComponents)
+      // console.log('allStrings::', allTransComponentsString)
+
+
+
 
 
 

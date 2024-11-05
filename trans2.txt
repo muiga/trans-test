@@ -1,5 +1,4 @@
 
-GOT TO  PLUGIN:: /home/muiga/Dev/Work/translation/src/App.tsx
 Node {
   type: 'File',
   start: 0,
