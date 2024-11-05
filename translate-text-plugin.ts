@@ -142,8 +142,10 @@ export default function translateTextPlugin(env: { [key: string]: string }): Plu
         }else{
           const newStrArr:string[] = str[str.length - 1] === '.' ? str.slice(0, -1) : str;
           stringToTrans = newStrArr.join(' ').replace(/\s+/g, ' ').replace(/\s*>\s*/g, '>').trim()
+
+          console.log(stringToTrans)
         }
-        const newString = translationMap[stringToTrans] || stringToTrans;
+        const newString = (translationMap[stringToTrans] || stringToTrans);
 
         const currentNode = allTransComponents[index]
         traverse(ast, {
@@ -157,7 +159,8 @@ export default function translateTextPlugin(env: { [key: string]: string }): Plu
                  raw: `${newString}`,
                };
              }else{
-               const transArr = parseStringToArray(newString)
+               const example = newString.replace(/\s*>\s*/g, '>').trim()
+               const transArr = parseStringToArray(example)
                const findAndTranslate = (parentNode:CustomAny)=> {
                  // Iterate over the child nodes of the parent node
                  parentNode.children.forEach((child:CustomAny) => {

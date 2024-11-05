@@ -5,121 +5,8 @@
 vite v5.4.10 building for production...
 transforming...
 GOT TO  PLUGIN:: /home/muiga/Dev/Work/translation/src/App.tsx
-:str:: [
-  'Edit',             '<code>',
-  'src/App.tsx',      '<span>',
-  '3',                '<strong>',
-  'goats',            '</strong>',
-  '</span>',          '</code>',
-  'and save to test', '<strong>',
-  'HMR',              '</strong>'
-] trans:: [
-  'Edit',             '<code>',
-  'src/App.tsx',      '<span>',
-  '3',                '<strong>',
-  'goats',            '</strong>',
-  '</span>',          '</code>',
-  'and save to test', '<strong>',
-  'HMR',              '</strong>'
-] index:: 0
-child:: 
-            Edit
-child:: 
-            
-:str:: [
-  'Edit',             '<code>',
-  'src/App.tsx',      '<span>',
-  '3',                '<strong>',
-  'goats',            '</strong>',
-  '</span>',          '</code>',
-  'and save to test', '<strong>',
-  'HMR',              '</strong>'
-] trans:: [
-  'Edit',             '<code>',
-  'src/App.tsx',      '<span>',
-  '3',                '<strong>',
-  'goats',            '</strong>',
-  '</span>',          '</code>',
-  'and save to test', '<strong>',
-  'HMR',              '</strong>'
-] index:: 0
-child:: 
-              src/App.tsx
-child:: 
-              
-:str:: [
-  'Edit',             '<code>',
-  'src/App.tsx',      '<span>',
-  '3',                '<strong>',
-  'goats',            '</strong>',
-  '</span>',          '</code>',
-  'and save to test', '<strong>',
-  'HMR',              '</strong>'
-] trans:: [
-  'Edit',             '<code>',
-  'src/App.tsx',      '<span>',
-  '3',                '<strong>',
-  'goats',            '</strong>',
-  '</span>',          '</code>',
-  'and save to test', '<strong>',
-  'HMR',              '</strong>'
-] index:: 0
-child:: 
-                3 
-:str:: [
-  'Edit',             '<code>',
-  'src/App.tsx',      '<span>',
-  '3',                '<strong>',
-  'goats',            '</strong>',
-  '</span>',          '</code>',
-  'and save to test', '<strong>',
-  'HMR',              '</strong>'
-] trans:: [
-  'Edit',             '<code>',
-  'src/App.tsx',      '<span>',
-  '3',                '<strong>',
-  'goats',            '</strong>',
-  '</span>',          '</code>',
-  'and save to test', '<strong>',
-  'HMR',              '</strong>'
-] index:: 0
-child:: goats 
-child:: 
-              
-child:: 
-            
-child:: 
-            and save to test 
-:str:: [
-  'Edit',             '<code>',
-  'src/App.tsx',      '<span>',
-  '3',                '<strong>',
-  'goats',            '</strong>',
-  '</span>',          '</code>',
-  'and save to test', '<strong>',
-  'HMR',              '</strong>'
-] trans:: [
-  'Edit',             '<code>',
-  'src/App.tsx',      '<span>',
-  '3',                '<strong>',
-  'goats',            '</strong>',
-  '</span>',          '</code>',
-  'and save to test', '<strong>',
-  'HMR',              '</strong>'
-] index:: 0
-child:: HMR
-child:: 
-          
-:str:: [
-  'You can withdraw your earnings once you have accumulated a minimum of',
-  '.'
-] trans:: [
-  'Unaweza kuondoa mapato yako mara tu utakapokusanya kiwango cha chini cha'
-] index:: 8
-child:: 
-              You can withdraw your earnings once you have accumulated a minimum of 
-child::  
-child:: .
+Edit <code>src/App.tsx <span>3 <strong>goats </strong></span></code>and save to test <strong>HMR </strong>
+You can withdraw your earnings once you have accumulated a minimum of
 GOT TO  PLUGIN:: /home/muiga/Dev/Work/translation/src/utils/translate.ts
 GOT TO  PLUGIN:: /home/muiga/Dev/Work/translation/src/components/Trans.tsx
 ✓ 36 modules transformed.
@@ -128,5 +15,5 @@ computing gzip size...
 dist/index.html                   0.46 kB │ gzip:  0.30 kB
 dist/assets/react-CHdo91hT.svg    4.13 kB │ gzip:  2.14 kB
 dist/assets/index-n_ryQ3BS.css    1.39 kB │ gzip:  0.72 kB
-dist/assets/index-b-sknfC7.js   143.41 kB │ gzip: 46.21 kB
-✓ built in 1.81s
+dist/assets/index-htRGEsB_.js   143.42 kB │ gzip: 46.18 kB
+✓ built in 1.96s
