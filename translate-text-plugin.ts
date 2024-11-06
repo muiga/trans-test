@@ -3,13 +3,33 @@ import translations from "./src/locales/translations.json";
 import * as babelParser from "@babel/parser";
 import _babelGenerator from "@babel/generator";
 import _traverse from "@babel/traverse";
-// import * as babelTypes from '@babel/types';
+import * as babelTypes from '@babel/types';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type CustomAny = any
 
 const generator = _babelGenerator.default
 const traverse = _traverse.default;
+
+const  extractStringFromTransCall = (code: string): string | null => {
+  const match = code.match(/trans\(['"`](.*?)['"`]\)/);
+  return match ? match[1] : null;
+}
+
+
+const formatMalformedString = (inputString:string) => {
+  const trimmedString = inputString.trim();
+  let continuousString = trimmedString.replace(/\n/g, " ");
+  continuousString.replace(/(\s?)(<[^>]*>)/g, ' $2').replace(/\s{2,}/g, ' ');
+  continuousString = continuousString.replace(/{" "}/g, "");
+  continuousString = continuousString.replace(/\s+/g, " ");
+  continuousString = continuousString.replace(/"/g, "'");
+  // Step 4: Ensure HTML tags are properly formatted (optional: further validation can be added here)
+  continuousString = continuousString.replace(/>\s+/g, '>').replace(/\s+</g, ' <')
+      .replace(/(?<!>)<\//g, ' </')
+      .replace(/(\w)\s*(<)/g, '$1 $2');
+  return continuousString;
+};
 
 export default function translateTextPlugin(env: { [key: string]: string }): PluginOption {
   console.log("translating....");
@@ -26,9 +46,7 @@ export default function translateTextPlugin(env: { [key: string]: string }): Plu
           return acc;
         }, {} as Record<string, string>);
 
-       if(translationMap){
-       //   test
-       }
+
 
       }
     }else{
@@ -73,6 +91,8 @@ export default function translateTextPlugin(env: { [key: string]: string }): Plu
         ],
       });
 
+      // console.dir(ast, {depth:Infinity});
+
       const allTransComponents:CustomAny[] =[]
       const allFunctions:CustomAny[] =[]
 
@@ -88,10 +108,73 @@ export default function translateTextPlugin(env: { [key: string]: string }): Plu
           }
         },
       });
-
+      // change in components
       allTransComponents.forEach((node:CustomAny)=>{
-         const string = generator(node).code
-        console.log('code', string)
+         const string = formatMalformedString( generator(node).code).replace(/<Trans>|<\/Trans>/g, '').trim()
+
+        const newString = translationMap[string] || string
+        const nodeAst = babelParser.parse(`<>${newString}</>`,{
+          sourceType: 'module',
+          plugins: [
+            'jsx',
+            'typescript',
+          ],
+        });
+        traverse(ast, {
+          JSXElement(path:CustomAny) {
+            if (path.node.start === node.start && path.node.end === node.end) {
+              const parentPath = path.parentPath;
+              const parentNode = parentPath.node;
+
+              if(parentNode.children) {
+                const parentChildren = parentNode.children
+                const indexInParent = parentChildren.indexOf(path.node);
+
+                if(indexInParent !== -1){
+                  if('expression' in nodeAst.program.body[0]  && babelTypes.isJSXFragment( nodeAst.program.body[0].expression)  ){
+                    const fragment = nodeAst.program.body[0].expression
+                    parentNode.children = fragment.children
+                  }
+                }
+              }
+            }
+          }
+        });
+      })
+      // change function calls
+      allFunctions.forEach((node:CustomAny)=>{
+        const string = extractStringFromTransCall( generator(node).code)
+
+        if(!string) return
+
+        const newString = translationMap[string] || string
+        const nodeAst = babelParser.parse(`<>${newString}</>`,{
+          sourceType: 'module',
+          plugins: [
+            'jsx',
+            'typescript',
+          ],
+        });
+
+        traverse(ast, {
+          CallExpression(path:CustomAny) {
+            if (path.node.start === node.start && path.node.end === node.end) {
+              const parentPath = path.parentPath;
+              const parentNode = parentPath.node;
+              const grandParentPath = parentPath.parentPath;
+              const grandParentNode = grandParentPath.node;
+              if(grandParentNode.children) {
+                const grandParentChildren = grandParentNode.children
+                const indexInParent = grandParentChildren.indexOf(parentNode);
+                if(indexInParent !== -1){
+                if('expression' in nodeAst.program.body[0]  && babelTypes.isJSXFragment( nodeAst.program.body[0].expression)  ){
+                  const fragment = nodeAst.program.body[0].expression
+                  grandParentChildren[indexInParent] = fragment.children[0]
+                }}
+              }
+            }
+          },
+        });
       })
 
       return generator(ast).code;

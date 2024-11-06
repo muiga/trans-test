@@ -5,43 +5,287 @@
 translating....
 vite v5.4.10 building for production...
 transforming...
-code <Trans>
-            Edit{" "}
-            <a target={"-blank"} style={{
-    color: "red"
-  }} href={'https://www.google.com/'}>
-              src/App.tsx{" "}
-              <span>
-                3 <strong>goats </strong>
-              </span>
-            </a>
-            and save to test <strong>HMR</strong>
-          </Trans>
-code <Trans>what is betkumi affiliate program</Trans>
-code <Trans>
-          BetKumi Affiliates is a program where we give you the opportunity to earn
-          money every month simply by giving us the chance to welcome more
-          players through our virtual doors.</Trans>
-code <Trans>How does the Affiliate Program work</Trans>
-code <Trans>
-          When you share your referral link with any of your friends, family or
-          advertise the link and a player signup at our site that player becomes
-          your referral and they will earn you commissions by playing at Betkumi.</Trans>
-code <Trans>How much do i earn?</Trans>
-code <Trans>
-          As part of our affiliate network, you will be paid in a revenue share
-          based model. You earn a 30% commission on revenues made.</Trans>
-code <Trans>When can I withdraw?</Trans>
-code <Trans>
-              You can withdraw your earnings once you have accumulated a minimum of {currency} {VITE_REFERRAL_MIN_PAYOUT}.</Trans>
-code <Trans>
-              You can withdraw your earnings if {VITE_REFERRAL_MIN_PAYOUT} days have passed since your
-              last withdrawal.</Trans>
-✓ 36 modules transformed.
+Hariri Vite + React
+Node {
+  type: 'File',
+  start: 0,
+  end: 24,
+  loc: SourceLocation {
+    start: Position { line: 1, column: 0, index: 0 },
+    end: Position { line: 1, column: 24, index: 24 },
+    filename: undefined,
+    identifierName: undefined
+  },
+  errors: [],
+  program: Node {
+    type: 'Program',
+    start: 0,
+    end: 24,
+    loc: SourceLocation {
+      start: Position { line: 1, column: 0, index: 0 },
+      end: Position { line: 1, column: 24, index: 24 },
+      filename: undefined,
+      identifierName: undefined
+    },
+    sourceType: 'module',
+    interpreter: null,
+    body: [
+      Node {
+        type: 'ExpressionStatement',
+        start: 0,
+        end: 24,
+        loc: SourceLocation {
+          start: Position { line: 1, column: 0, index: 0 },
+          end: Position { line: 1, column: 24, index: 24 },
+          filename: undefined,
+          identifierName: undefined
+        },
+        expression: Node {
+          type: 'JSXFragment',
+          start: 0,
+          end: 24,
+          loc: SourceLocation {
+            start: Position { line: 1, column: 0, index: 0 },
+            end: Position { line: 1, column: 24, index: 24 },
+            filename: undefined,
+            identifierName: undefined
+          },
+          openingFragment: Node {
+            type: 'JSXOpeningFragment',
+            start: 0,
+            end: 2,
+            loc: SourceLocation {
+              start: Position { line: 1, column: 0, index: 0 },
+              end: Position { line: 1, column: 2, index: 2 },
+              filename: undefined,
+              identifierName: undefined
+            }
+          },
+          closingFragment: Node {
+            type: 'JSXClosingFragment',
+            start: 21,
+            end: 24,
+            loc: SourceLocation {
+              start: Position { line: 1, column: 21, index: 21 },
+              end: Position { line: 1, column: 24, index: 24 },
+              filename: undefined,
+              identifierName: undefined
+            }
+          },
+          children: [
+            Node {
+              type: 'JSXText',
+              start: 2,
+              end: 21,
+              loc: SourceLocation {
+                start: Position { line: 1, column: 2, index: 2 },
+                end: Position { line: 1, column: 21, index: 21 },
+                filename: undefined,
+                identifierName: undefined
+              },
+              extra: {
+                rawValue: 'Hariri Vite + React',
+                raw: 'Hariri Vite + React'
+              },
+              value: 'Hariri Vite + React'
+            }
+          ]
+        }
+      }
+    ],
+    directives: [],
+    extra: { topLevelAwait: false }
+  },
+  comments: []
+}
+hesabu ni
+Node {
+  type: 'File',
+  start: 0,
+  end: 14,
+  loc: SourceLocation {
+    start: Position { line: 1, column: 0, index: 0 },
+    end: Position { line: 1, column: 14, index: 14 },
+    filename: undefined,
+    identifierName: undefined
+  },
+  errors: [],
+  program: Node {
+    type: 'Program',
+    start: 0,
+    end: 14,
+    loc: SourceLocation {
+      start: Position { line: 1, column: 0, index: 0 },
+      end: Position { line: 1, column: 14, index: 14 },
+      filename: undefined,
+      identifierName: undefined
+    },
+    sourceType: 'module',
+    interpreter: null,
+    body: [
+      Node {
+        type: 'ExpressionStatement',
+        start: 0,
+        end: 14,
+        loc: SourceLocation {
+          start: Position { line: 1, column: 0, index: 0 },
+          end: Position { line: 1, column: 14, index: 14 },
+          filename: undefined,
+          identifierName: undefined
+        },
+        expression: Node {
+          type: 'JSXFragment',
+          start: 0,
+          end: 14,
+          loc: SourceLocation {
+            start: Position { line: 1, column: 0, index: 0 },
+            end: Position { line: 1, column: 14, index: 14 },
+            filename: undefined,
+            identifierName: undefined
+          },
+          openingFragment: Node {
+            type: 'JSXOpeningFragment',
+            start: 0,
+            end: 2,
+            loc: SourceLocation {
+              start: Position { line: 1, column: 0, index: 0 },
+              end: Position { line: 1, column: 2, index: 2 },
+              filename: undefined,
+              identifierName: undefined
+            }
+          },
+          closingFragment: Node {
+            type: 'JSXClosingFragment',
+            start: 11,
+            end: 14,
+            loc: SourceLocation {
+              start: Position { line: 1, column: 11, index: 11 },
+              end: Position { line: 1, column: 14, index: 14 },
+              filename: undefined,
+              identifierName: undefined
+            }
+          },
+          children: [
+            Node {
+              type: 'JSXText',
+              start: 2,
+              end: 11,
+              loc: SourceLocation {
+                start: Position { line: 1, column: 2, index: 2 },
+                end: Position { line: 1, column: 11, index: 11 },
+                filename: undefined,
+                identifierName: undefined
+              },
+              extra: { rawValue: 'hesabu ni', raw: 'hesabu ni' },
+              value: 'hesabu ni'
+            }
+          ]
+        }
+      }
+    ],
+    directives: [],
+    extra: { topLevelAwait: false }
+  },
+  comments: []
+}
+Bonyeza kwenye logo za Vite na React kujifunza zaidi
+Node {
+  type: 'File',
+  start: 0,
+  end: 57,
+  loc: SourceLocation {
+    start: Position { line: 1, column: 0, index: 0 },
+    end: Position { line: 1, column: 57, index: 57 },
+    filename: undefined,
+    identifierName: undefined
+  },
+  errors: [],
+  program: Node {
+    type: 'Program',
+    start: 0,
+    end: 57,
+    loc: SourceLocation {
+      start: Position { line: 1, column: 0, index: 0 },
+      end: Position { line: 1, column: 57, index: 57 },
+      filename: undefined,
+      identifierName: undefined
+    },
+    sourceType: 'module',
+    interpreter: null,
+    body: [
+      Node {
+        type: 'ExpressionStatement',
+        start: 0,
+        end: 57,
+        loc: SourceLocation {
+          start: Position { line: 1, column: 0, index: 0 },
+          end: Position { line: 1, column: 57, index: 57 },
+          filename: undefined,
+          identifierName: undefined
+        },
+        expression: Node {
+          type: 'JSXFragment',
+          start: 0,
+          end: 57,
+          loc: SourceLocation {
+            start: Position { line: 1, column: 0, index: 0 },
+            end: Position { line: 1, column: 57, index: 57 },
+            filename: undefined,
+            identifierName: undefined
+          },
+          openingFragment: Node {
+            type: 'JSXOpeningFragment',
+            start: 0,
+            end: 2,
+            loc: SourceLocation {
+              start: Position { line: 1, column: 0, index: 0 },
+              end: Position { line: 1, column: 2, index: 2 },
+              filename: undefined,
+              identifierName: undefined
+            }
+          },
+          closingFragment: Node {
+            type: 'JSXClosingFragment',
+            start: 54,
+            end: 57,
+            loc: SourceLocation {
+              start: Position { line: 1, column: 54, index: 54 },
+              end: Position { line: 1, column: 57, index: 57 },
+              filename: undefined,
+              identifierName: undefined
+            }
+          },
+          children: [
+            Node {
+              type: 'JSXText',
+              start: 2,
+              end: 54,
+              loc: SourceLocation {
+                start: Position { line: 1, column: 2, index: 2 },
+                end: Position { line: 1, column: 54, index: 54 },
+                filename: undefined,
+                identifierName: undefined
+              },
+              extra: {
+                rawValue: 'Bonyeza kwenye logo za Vite na React kujifunza zaidi',
+                raw: 'Bonyeza kwenye logo za Vite na React kujifunza zaidi'
+              },
+              value: 'Bonyeza kwenye logo za Vite na React kujifunza zaidi'
+            }
+          ]
+        }
+      }
+    ],
+    directives: [],
+    extra: { topLevelAwait: false }
+  },
+  comments: []
+}
+✓ 35 modules transformed.
 rendering chunks...
 computing gzip size...
 dist/index.html                   0.46 kB │ gzip:  0.30 kB
 dist/assets/react-CHdo91hT.svg    4.13 kB │ gzip:  2.14 kB
 dist/assets/index-n_ryQ3BS.css    1.39 kB │ gzip:  0.72 kB
-dist/assets/index-DuwlQxVK.js   143.47 kB │ gzip: 46.19 kB
-✓ built in 1.74s
+dist/assets/index-ChK6mKA4.js   143.22 kB │ gzip: 46.21 kB
+✓ built in 1.96s
