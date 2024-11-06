@@ -18,14 +18,68 @@ export default function translateTextPlugin(env: { [key: string]: string }): Plu
   let translationMap:Record<string, string>
 
     if(locale in translations){
-        translationMap = translations[locale as keyof typeof translations]
-      if(translationMap){
-        // console.log()
+       const rawTranslationMap = translations[locale as keyof typeof translations]
+      if(rawTranslationMap){
+       translationMap = Object.entries(rawTranslationMap).reduce((acc, [key, value]) => {
+          const cleanedKey = key.replace(/\s+/g, ' ').trim();
+         acc[cleanedKey] = value.replace(/\s+/g, ' ').trim();
+          return acc;
+        }, {} as Record<string, string>);
+
       }
     }else{
       // console.log(`Missing translationMap for ${locale}`);
       throw new Error(`Aborting build due to Missing translationMap for [${locale}]`);
     }
+
+  const createStringFromNode= (content:CustomAny[])=>{
+    const strArr:string[] = []
+    content.forEach((node:CustomAny)=>{
+      if( babelTypes.isJSXText(node)){
+        const text = node.value.replace(/\s+/g, ' ').trim()
+        strArr.push(text)
+      } else if(babelTypes.isJSXElement(node)){
+        const children = node.children
+        const el ='name' in node.openingElement.name && node.openingElement.name.name
+        let cEl;
+        if((node.closingElement && 'name' in node.closingElement.name)){
+          cEl = node.closingElement.name.name
+        }
+        const str = createStringFromNode(children)
+        let newStr:string[] = []
+        if(el &&  typeof el ==='string' && cEl &&  typeof cEl ==='string'){
+          newStr = [`<${el}>`, ...str, `</${cEl}>`]
+        } else{
+          newStr = [...str]
+        }
+        strArr.push(...newStr)
+      }else if (babelTypes.isJSXExpressionContainer(node) &&  'name' in node.expression){
+        const val = node.expression.name
+        strArr.push(`{${val}}`)
+      }else{
+        strArr.push("")
+      }
+    });
+    return strArr
+  }
+
+  const parseStringToArray = (inputString: string): string[] => {
+    const regex = /(<[^>]+>)|(\{[^}]+})|([^<{]+(?:\s[^<{]+)*)/g;
+    const result: string[] = [];
+
+    // Use regex to find matches
+    let matches;
+    while ((matches = regex.exec(inputString)) !== null) {
+      if (matches[1]) {
+        result.push(matches[1]); // Push the HTML tag
+      } else if (matches[2]) {
+        result.push(matches[2]); // Push the placeholder
+      } else if (matches[3]) {
+        result.push(matches[3].trim()); // Push the text content, trimming any excess whitespace
+      }
+    }
+    return result.filter(str => str.trim() !== "")
+  };
 
 
 
@@ -56,37 +110,6 @@ export default function translateTextPlugin(env: { [key: string]: string }): Plu
         },
       });
 
-      const createStringFromNode= (content:CustomAny[])=>{
-        const strArr:string[] = []
-        content.forEach((node:CustomAny)=>{
-          if( babelTypes.isJSXText(node)){
-            const text = node.value.replace(/\s+/g, ' ').trim()
-            strArr.push(text)
-          } else if(babelTypes.isJSXElement(node)){
-            const children = node.children
-            const el ='name' in node.openingElement.name && node.openingElement.name.name
-            let cEl;
-            if((node.closingElement && 'name' in node.closingElement.name)){
-              cEl = node.closingElement.name.name
-            }
-            const str = createStringFromNode(children)
-            let newStr:string[] = []
-            if(el &&  typeof el ==='string' && cEl &&  typeof cEl ==='string'){
-              newStr = [`<${el}>`, ...str, `</${cEl}>`]
-            } else{
-               newStr = [...str]
-            }
-            strArr.push(...newStr)
-          }else if (babelTypes.isJSXExpressionContainer(node) &&  'name' in node.expression){
-            const val = node.expression.name
-            strArr.push(`{${val}}`)
-          }else{
-            strArr.push("")
-          }
-        });
-        return strArr
-      }
-
       allTransComponents.forEach((node:CustomAny)=>{
           const content:CustomAny[] = node.children
         const str = createStringFromNode(content)
@@ -100,30 +123,6 @@ export default function translateTextPlugin(env: { [key: string]: string }): Plu
           allTransComponentsString.push(stringToTrans)
         }
       })
-
-      // console.log('Strs::', allTransComponentsString)
-      //
-      // console.dir(allTransComponents[allTransComponents.length - 1], {depth:Infinity})
-
-      const parseStringToArray = (inputString: string): string[] => {
-        const regex = /(<[^>]+>)|(\{[^}]+})|([^<{]+(?:\s[^<{]+)*)/g;
-        const result: string[] = [];
-
-        // Use regex to find matches
-        let matches;
-        while ((matches = regex.exec(inputString)) !== null) {
-          if (matches[1]) {
-            result.push(matches[1]); // Push the HTML tag
-          } else if (matches[2]) {
-            result.push(matches[2]); // Push the placeholder
-          } else if (matches[3]) {
-            result.push(matches[3].trim()); // Push the text content, trimming any excess whitespace
-          }
-        }
-        return result.filter(str => str.trim() !== "")
-      };
-
-
 
       allTransComponentsString.forEach((str,index)=>{
         const newString = (translationMap[str] || str);
@@ -152,7 +151,7 @@ export default function translateTextPlugin(env: { [key: string]: string }): Plu
                        const index = originalArr.indexOf(text)
                        if(index !== -1 && transArr[index]){
                        // wait
-                         const val =`${index === transArr.length - 1 ? ' ' : ''}${transArr[index]} `
+                         const val =`${transArr[index-1] && transArr[index-1].endsWith('}') ? ' ' : ''}${transArr[index]} `
                          child.value = val;
                          child.extra = {
                            rawValue: val,
