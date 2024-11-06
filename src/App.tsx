@@ -33,7 +33,7 @@ function App() {
         <p>
           <Trans>
             Edit{" "}
-            <a style={{ color: "red" }} href={'https://www.google.com/'}>
+            <a target={"-blank"} style={{ color: "red" }} href={'https://www.google.com/'}>
               src/App.tsx{" "}
               <span>
                 3 <strong>goats </strong>
@@ -79,7 +79,7 @@ function App() {
             </li>
             <li>
               <Trans>
-              You can withdraw your earnings if 14 days have passed since your
+              You can withdraw your earnings if {VITE_REFERRAL_MIN_PAYOUT} days have passed since your
               last withdrawal.</Trans>
             </li>
           </ul>

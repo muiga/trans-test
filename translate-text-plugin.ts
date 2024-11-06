@@ -1,5 +1,4 @@
-
-import { PluginOption} from 'vite';
+import {PluginOption} from 'vite';
 import translations from "./src/locales/translations.json";
 import * as babelParser from "@babel/parser";
 import _babelGenerator from "@babel/generator";
@@ -35,18 +34,9 @@ export default function translateTextPlugin(env: { [key: string]: string }): Plu
     enforce: "pre",
     transform(code: string,id:string): string {
 
-
-
       if (!id.endsWith('.ts') && !id.endsWith('.tsx') || id.endsWith('main.tsx')) {
         return code;
       }
-
-
-      console.log('GOT TO  PLUGIN::',id)
-      //  log ast
-      // const ast= parseAst(code)
-
-
 
       const ast = babelParser.parse(code,{
         sourceType: 'module',
@@ -54,11 +44,10 @@ export default function translateTextPlugin(env: { [key: string]: string }): Plu
           'jsx',
           'typescript',
         ],
-      })
+      });
 
       const allTransComponents:CustomAny[] =[]
       const allTransComponentsString:string[] =[]
-
 
       traverse(ast, {
         JSXElement(path:CustomAny) {
@@ -67,12 +56,9 @@ export default function translateTextPlugin(env: { [key: string]: string }): Plu
         },
       });
 
-
-
       const createStringFromNode= (content:CustomAny[])=>{
         const strArr:string[] = []
         content.forEach((node:CustomAny)=>{
-
           if( babelTypes.isJSXText(node)){
             const text = node.value.replace(/\s+/g, ' ').trim()
             strArr.push(text)
@@ -83,9 +69,7 @@ export default function translateTextPlugin(env: { [key: string]: string }): Plu
             if((node.closingElement && 'name' in node.closingElement.name)){
               cEl = node.closingElement.name.name
             }
-
             const str = createStringFromNode(children)
-
             let newStr:string[] = []
             if(el &&  typeof el ==='string' && cEl &&  typeof cEl ==='string'){
               newStr = [`<${el}>`, ...str, `</${cEl}>`]
@@ -93,12 +77,13 @@ export default function translateTextPlugin(env: { [key: string]: string }): Plu
                newStr = [...str]
             }
             strArr.push(...newStr)
+          }else if (babelTypes.isJSXExpressionContainer(node) &&  'name' in node.expression){
+            const val = node.expression.name
+            strArr.push(`{${val}}`)
           }else{
-            strArr.push('')
+            strArr.push("")
           }
-
         });
-
         return strArr
       }
 
@@ -113,35 +98,35 @@ export default function translateTextPlugin(env: { [key: string]: string }): Plu
           const newStrArr:string[] = str[str.length - 1] === '.' ? str.slice(0, -1) : str;
           const stringToTrans = newStrArr.join(' ').replace(/\s+/g, ' ').replace(/\s*>\s*/g, '>').trim()
           allTransComponentsString.push(stringToTrans)
-          //   work with  complex nodes
-
         }
-
       })
 
+      // console.log('Strs::', allTransComponentsString)
+      //
+      // console.dir(allTransComponents[allTransComponents.length - 1], {depth:Infinity})
 
-      const parseStringToArray = (inputString:string):string[] =>{
-        const regex = /(<[^>]+>|[^<]+)/g;
-        const matches = inputString.match(regex);
-        const result:string[] = [];
+      const parseStringToArray = (inputString: string): string[] => {
+        const regex = /(<[^>]+>)|(\{[^}]+})|([^<{]+(?:\s[^<{]+)*)/g;
+        const result: string[] = [];
 
-
-       if(matches) matches.forEach((match) => {
-          if (match.startsWith('<')) {
-            result.push(match);  // push the HTML tag itself
-          } else {
-            result.push(match.trim());  // push the text content
+        // Use regex to find matches
+        let matches;
+        while ((matches = regex.exec(inputString)) !== null) {
+          if (matches[1]) {
+            result.push(matches[1]); // Push the HTML tag
+          } else if (matches[2]) {
+            result.push(matches[2]); // Push the placeholder
+          } else if (matches[3]) {
+            result.push(matches[3].trim()); // Push the text content, trimming any excess whitespace
           }
-        });
+        }
+        return result.filter(str => str.trim() !== "")
+      };
 
-        return result;
-      }
 
 
       allTransComponentsString.forEach((str,index)=>{
-
         const newString = (translationMap[str] || str);
-
         const currentNode = allTransComponents[index]
         traverse(ast, {
           JSXElement(path:CustomAny) {
@@ -163,12 +148,11 @@ export default function translateTextPlugin(env: { [key: string]: string }): Plu
                    if (child.type === 'JSXText') {
                    // replace if found
                      const text= child.value.replace(/\s+/g, ' ').trim()
-
                      if(text && typeof text === 'string'){
                        const index = originalArr.indexOf(text)
                        if(index !== -1 && transArr[index]){
                        // wait
-                         const val =transArr[index]+" "
+                         const val =`${index === transArr.length - 1 ? ' ' : ''}${transArr[index]} `
                          child.value = val;
                          child.extra = {
                            rawValue: val,
@@ -176,21 +160,14 @@ export default function translateTextPlugin(env: { [key: string]: string }): Plu
                          };
                        }
                      }
-
                    }
-
                    // If the child is a JSXElement, recurse into its children
                    if (child.type === 'JSXElement') {
                      findAndTranslate(child) // Recurse
                    }
                  });
-
                }
-
                findAndTranslate(path.node);
-
-
-             //   complex nodes
              }
             }
           },
@@ -209,18 +186,9 @@ export default function translateTextPlugin(env: { [key: string]: string }): Plu
             }
           }
         });
-
       })
 
-
-
-
-
-
-
       return generator(ast).code;
-
-
     },
   };
 }
