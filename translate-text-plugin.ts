@@ -5,14 +5,14 @@ import _babelGenerator from "@babel/generator";
 import _traverse from "@babel/traverse";
 import * as babelTypes from '@babel/types';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type CustomAny = any
 
 const generator = _babelGenerator.default
 const traverse = _traverse.default;
 
 export default function translateTextPlugin(env: { [key: string]: string }): PluginOption {
-  // console.log("translating....");
-
+  console.log("translating....");
   const locale = (env["LOCALE"] || "en")
 
   let translationMap:Record<string, string>
@@ -46,7 +46,7 @@ export default function translateTextPlugin(env: { [key: string]: string }): Plu
           cEl = node.closingElement.name.name
         }
         const str = createStringFromNode(children)
-        let newStr:string[] = []
+        let newStr:string[];
         if(el &&  typeof el ==='string' && cEl &&  typeof cEl ==='string'){
           newStr = [`<${el}>`, ...str, `</${cEl}>`]
         } else{
@@ -87,7 +87,6 @@ export default function translateTextPlugin(env: { [key: string]: string }): Plu
     name: "translate-text-plugin",
     enforce: "pre",
     transform(code: string,id:string): string {
-
       if (!id.endsWith('.ts') && !id.endsWith('.tsx') || id.endsWith('main.tsx')) {
         return code;
       }
@@ -101,12 +100,19 @@ export default function translateTextPlugin(env: { [key: string]: string }): Plu
       });
 
       const allTransComponents:CustomAny[] =[]
+      const allFunctions:CustomAny[] =[]
       const allTransComponentsString:string[] =[]
 
       traverse(ast, {
         JSXElement(path:CustomAny) {
           if (path.node.openingElement.name.name === 'Trans') {
             allTransComponents.push(path.node)}
+        },
+        CallExpression(path:CustomAny) {
+          // Check if the callee is named 'trans'
+          if (path.node.callee.name === 'trans') {
+            allFunctions.push(path.node)
+          }
         },
       });
 
@@ -124,68 +130,8 @@ export default function translateTextPlugin(env: { [key: string]: string }): Plu
         }
       })
 
-      allTransComponentsString.forEach((str,index)=>{
-        const newString = (translationMap[str] || str);
-        const currentNode = allTransComponents[index]
-        traverse(ast, {
-          JSXElement(path:CustomAny) {
-            if (path.node.start === currentNode.start && path.node.end === currentNode.end) {
-             const content:CustomAny[] = path.node.children;
-             if(content.length === 1 && babelTypes.isJSXText(content[0])){
-               content[0].value = newString;
-               content[0].extra = {
-                 rawValue: newString,
-                 raw: `${newString}`,
-               };
-             }else{
-               const example = newString.replace(/\s*>\s*/g, '>').trim()
-               const originalArr = parseStringToArray(str)
-               const transArr = parseStringToArray(example)
-               const findAndTranslate = (parentNode:CustomAny)=> {
-                 // Iterate over the child nodes of the parent node
-                 parentNode.children.forEach((child:CustomAny) => {
-                   if (child.type === 'JSXText') {
-                   // replace if found
-                     const text= child.value.replace(/\s+/g, ' ').trim()
-                     if(text && typeof text === 'string'){
-                       const index = originalArr.indexOf(text)
-                       if(index !== -1 && transArr[index]){
-                       // wait
-                         const val =`${transArr[index-1] && transArr[index-1].endsWith('}') ? ' ' : ''}${transArr[index]} `
-                         child.value = val;
-                         child.extra = {
-                           rawValue: val,
-                           raw: `${val}`,
-                         };
-                       }
-                     }
-                   }
-                   // If the child is a JSXElement, recurse into its children
-                   if (child.type === 'JSXElement') {
-                     findAndTranslate(child) // Recurse
-                   }
-                 });
-               }
-               findAndTranslate(path.node);
-             }
-            }
-          },
-          CallExpression(path:CustomAny) {
-            // Check if the callee is named 'trans'
-            if (path.node.callee.name === 'trans') {
-              const content:CustomAny[] = path.node.arguments
-              if(content[0]  && 'value' in content[0]){
-                const newStr = (translationMap[content[0].value] || content[0].value);
-                content[0].value = newStr;
-                content[0].extra = {
-                  rawValue: newStr,
-                  raw: `"${newStr}"`,
-                };
-              }
-            }
-          }
-        });
-      })
+
+
 
       return generator(ast).code;
     },
