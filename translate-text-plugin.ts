@@ -3,7 +3,7 @@ import translations from "./src/locales/translations.json";
 import * as babelParser from "@babel/parser";
 import _babelGenerator from "@babel/generator";
 import _traverse from "@babel/traverse";
-import * as babelTypes from '@babel/types';
+// import * as babelTypes from '@babel/types';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type CustomAny = any
@@ -26,60 +26,34 @@ export default function translateTextPlugin(env: { [key: string]: string }): Plu
           return acc;
         }, {} as Record<string, string>);
 
+       if(translationMap){
+       //   test
+       }
+
       }
     }else{
       // console.log(`Missing translationMap for ${locale}`);
       throw new Error(`Aborting build due to Missing translationMap for [${locale}]`);
     }
 
-  const createStringFromNode= (content:CustomAny[])=>{
-    const strArr:string[] = []
-    content.forEach((node:CustomAny)=>{
-      if( babelTypes.isJSXText(node)){
-        const text = node.value.replace(/\s+/g, ' ').trim()
-        strArr.push(text)
-      } else if(babelTypes.isJSXElement(node)){
-        const children = node.children
-        const el ='name' in node.openingElement.name && node.openingElement.name.name
-        let cEl;
-        if((node.closingElement && 'name' in node.closingElement.name)){
-          cEl = node.closingElement.name.name
-        }
-        const str = createStringFromNode(children)
-        let newStr:string[];
-        if(el &&  typeof el ==='string' && cEl &&  typeof cEl ==='string'){
-          newStr = [`<${el}>`, ...str, `</${cEl}>`]
-        } else{
-          newStr = [...str]
-        }
-        strArr.push(...newStr)
-      }else if (babelTypes.isJSXExpressionContainer(node) &&  'name' in node.expression){
-        const val = node.expression.name
-        strArr.push(`{${val}}`)
-      }else{
-        strArr.push("")
-      }
-    });
-    return strArr
-  }
 
-  const parseStringToArray = (inputString: string): string[] => {
-    const regex = /(<[^>]+>)|(\{[^}]+})|([^<{]+(?:\s[^<{]+)*)/g;
-    const result: string[] = [];
-
-    // Use regex to find matches
-    let matches;
-    while ((matches = regex.exec(inputString)) !== null) {
-      if (matches[1]) {
-        result.push(matches[1]); // Push the HTML tag
-      } else if (matches[2]) {
-        result.push(matches[2]); // Push the placeholder
-      } else if (matches[3]) {
-        result.push(matches[3].trim()); // Push the text content, trimming any excess whitespace
-      }
-    }
-    return result.filter(str => str.trim() !== "")
-  };
+  // const parseStringToArray = (inputString: string): string[] => {
+  //   const regex = /(<[^>]+>)|(\{[^}]+})|([^<{]+(?:\s[^<{]+)*)/g;
+  //   const result: string[] = [];
+  //
+  //   // Use regex to find matches
+  //   let matches;
+  //   while ((matches = regex.exec(inputString)) !== null) {
+  //     if (matches[1]) {
+  //       result.push(matches[1]); // Push the HTML tag
+  //     } else if (matches[2]) {
+  //       result.push(matches[2]); // Push the placeholder
+  //     } else if (matches[3]) {
+  //       result.push(matches[3].trim()); // Push the text content, trimming any excess whitespace
+  //     }
+  //   }
+  //   return result.filter(str => str.trim() !== "")
+  // };
 
 
 
@@ -101,7 +75,6 @@ export default function translateTextPlugin(env: { [key: string]: string }): Plu
 
       const allTransComponents:CustomAny[] =[]
       const allFunctions:CustomAny[] =[]
-      const allTransComponentsString:string[] =[]
 
       traverse(ast, {
         JSXElement(path:CustomAny) {
@@ -117,21 +90,9 @@ export default function translateTextPlugin(env: { [key: string]: string }): Plu
       });
 
       allTransComponents.forEach((node:CustomAny)=>{
-          const content:CustomAny[] = node.children
-        const str = createStringFromNode(content)
-
-        if(content.length === 1 && babelTypes.isJSXText(content[0])){
-          const stringToTrans = str.join(' ').trim()
-          allTransComponentsString.push(stringToTrans)
-        }else{
-          const newStrArr:string[] = str[str.length - 1] === '.' ? str.slice(0, -1) : str;
-          const stringToTrans = newStrArr.join(' ').replace(/\s+/g, ' ').replace(/\s*>\s*/g, '>').trim()
-          allTransComponentsString.push(stringToTrans)
-        }
+         const string = generator(node).code
+        console.log('code', string)
       })
-
-
-
 
       return generator(ast).code;
     },
