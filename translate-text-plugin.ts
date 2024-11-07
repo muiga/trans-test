@@ -16,19 +16,16 @@ const  extractStringFromTransCall = (code: string): string | null => {
   return match ? match[1] : null;
 }
 
-
 const formatMalformedString = (inputString:string) => {
   const trimmedString = inputString.trim();
-  let continuousString = trimmedString.replace(/\n/g, " ");
-  continuousString.replace(/(\s?)(<[^>]*>)/g, ' $2').replace(/\s{2,}/g, ' ');
-  continuousString = continuousString.replace(/{" "}/g, "");
-  continuousString = continuousString.replace(/\s+/g, " ");
-  continuousString = continuousString.replace(/"/g, "'");
-  // Step 4: Ensure HTML tags are properly formatted (optional: further validation can be added here)
-  continuousString = continuousString.replace(/>\s+/g, '>').replace(/\s+</g, ' <')
+  return trimmedString.replace(/\n/g, " ")
+      .replace(/(\s?)(<[^>]*>)/g, ' $2').replace(/\s{2,}/g, ' ')
+      .replace(/{" "}/g, "")
+      .replace(/\s+/g, " ")
+      .replace(/"/g, "'")
+      .replace(/>\s+/g, '>').replace(/\s+</g, ' <')
       .replace(/(?<!>)<\//g, ' </')
       .replace(/(\w)\s*(<)/g, '$1 $2');
-  return continuousString;
 };
 
 export default function translateTextPlugin(env: { [key: string]: string }): PluginOption {
@@ -45,34 +42,11 @@ export default function translateTextPlugin(env: { [key: string]: string }): Plu
          acc[cleanedKey] = value.replace(/\s+/g, ' ').trim();
           return acc;
         }, {} as Record<string, string>);
-
-
-
       }
     }else{
       // console.log(`Missing translationMap for ${locale}`);
       throw new Error(`Aborting build due to Missing translationMap for [${locale}]`);
     }
-
-
-  // const parseStringToArray = (inputString: string): string[] => {
-  //   const regex = /(<[^>]+>)|(\{[^}]+})|([^<{]+(?:\s[^<{]+)*)/g;
-  //   const result: string[] = [];
-  //
-  //   // Use regex to find matches
-  //   let matches;
-  //   while ((matches = regex.exec(inputString)) !== null) {
-  //     if (matches[1]) {
-  //       result.push(matches[1]); // Push the HTML tag
-  //     } else if (matches[2]) {
-  //       result.push(matches[2]); // Push the placeholder
-  //     } else if (matches[3]) {
-  //       result.push(matches[3].trim()); // Push the text content, trimming any excess whitespace
-  //     }
-  //   }
-  //   return result.filter(str => str.trim() !== "")
-  // };
-
 
 
   return {
@@ -90,8 +64,6 @@ export default function translateTextPlugin(env: { [key: string]: string }): Plu
           'typescript',
         ],
       });
-
-      // console.dir(ast, {depth:Infinity});
 
       const allTransComponents:CustomAny[] =[]
       const allFunctions:CustomAny[] =[]
@@ -132,8 +104,8 @@ export default function translateTextPlugin(env: { [key: string]: string }): Plu
 
                 if(indexInParent !== -1){
                   if('expression' in nodeAst.program.body[0]  && babelTypes.isJSXFragment( nodeAst.program.body[0].expression)  ){
-                    const fragment = nodeAst.program.body[0].expression
-                    parentNode.children = fragment.children
+                    const fragment = nodeAst.program.body[0]
+                    parentChildren[indexInParent] = fragment.expression
                   }
                 }
               }
@@ -144,9 +116,7 @@ export default function translateTextPlugin(env: { [key: string]: string }): Plu
       // change function calls
       allFunctions.forEach((node:CustomAny)=>{
         const string = extractStringFromTransCall( generator(node).code)
-
         if(!string) return
-
         const newString = translationMap[string] || string
         const nodeAst = babelParser.parse(`<>${newString}</>`,{
           sourceType: 'module',

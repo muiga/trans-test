@@ -8,7 +8,8 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "extract": "node extract.cjs"
+    "extract": "node extract.cjs",
+    "serve": "tsc -b && vite build && vite preview"
   },
   "dependencies": {
     "react": "^18.3.1",
