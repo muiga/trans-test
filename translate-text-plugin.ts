@@ -4,6 +4,10 @@ import * as babelParser from "@babel/parser";
 import _babelGenerator from "@babel/generator";
 import _traverse from "@babel/traverse";
 import * as babelTypes from '@babel/types';
+// write to file Imports
+// import * as fs from 'fs';
+// import * as path from 'path';
+
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type CustomAny = any
@@ -48,6 +52,8 @@ export default function translateTextPlugin(env: { [key: string]: string }): Plu
       throw new Error(`Aborting build due to Missing translationMap for [${locale}]`);
     }
 
+  const extractedKeys:Record<string, string> = {};
+
 
   return {
     name: "translate-text-plugin",
@@ -83,8 +89,15 @@ export default function translateTextPlugin(env: { [key: string]: string }): Plu
       // change in components
       allTransComponents.forEach((node:CustomAny)=>{
          const string = formatMalformedString( generator(node).code).replace(/<Trans>|<\/Trans>/g, '').trim()
+        // extract key
+        extractedKeys[string] =""
+        const newString = translationMap[string]
 
-        const newString = translationMap[string] || string
+        if(!newString) {
+          // if no translation is found throw and abort build
+          throw new Error(`Aborting build due to Missing translation for [${string}]`);
+        }
+
         const nodeAst = babelParser.parse(`<>${newString}</>`,{
           sourceType: 'module',
           plugins: [
@@ -103,7 +116,9 @@ export default function translateTextPlugin(env: { [key: string]: string }): Plu
                 const indexInParent = parentChildren.indexOf(path.node);
 
                 if(indexInParent !== -1){
-                  if('expression' in nodeAst.program.body[0]  && babelTypes.isJSXFragment( nodeAst.program.body[0].expression)  ){
+                  if('expression' in nodeAst.program.body[0]  && babelTypes.isJSXFragment( nodeAst.program.body[0].expression)){
+                    console.log('Str::', newString)
+                    console.dir(nodeAst.program, {depth:Infinity})
                     const fragment = nodeAst.program.body[0]
                     parentChildren[indexInParent] = fragment.expression
                   }
@@ -117,7 +132,15 @@ export default function translateTextPlugin(env: { [key: string]: string }): Plu
       allFunctions.forEach((node:CustomAny)=>{
         const string = extractStringFromTransCall( generator(node).code)
         if(!string) return
-        const newString = translationMap[string] || string
+        // extract key
+        extractedKeys[string] =""
+        const newString = translationMap[string]
+
+        if(!newString) {
+          // if no translation is found throw and abort build
+          throw new Error(`Aborting build due to Missing translation for [${string}]`);
+        }
+
         const nodeAst = babelParser.parse(`<>${newString}</>`,{
           sourceType: 'module',
           plugins: [
@@ -137,7 +160,7 @@ export default function translateTextPlugin(env: { [key: string]: string }): Plu
                 const grandParentChildren = grandParentNode.children
                 const indexInParent = grandParentChildren.indexOf(parentNode);
                 if(indexInParent !== -1){
-                if('expression' in nodeAst.program.body[0]  && babelTypes.isJSXFragment( nodeAst.program.body[0].expression)  ){
+                if('expression' in nodeAst.program.body[0]  && babelTypes.isJSXFragment( nodeAst.program.body[0].expression)){
                   const fragment = nodeAst.program.body[0].expression
                   grandParentChildren[indexInParent] = fragment.children[0]
                 }}
@@ -146,6 +169,22 @@ export default function translateTextPlugin(env: { [key: string]: string }): Plu
           },
         });
       })
+
+
+      // ----Done elsewhere
+      // Write extracted keys to a JSON file
+      // const outputFilePath = path.join(
+      //     __dirname,
+      //     "src",
+      //     "locales",
+      //     "extracted_keys.json"
+      // );
+      // fs.writeFileSync(
+      //     outputFilePath,
+      //     JSON.stringify(extractedKeys, null, 2),
+      //     "utf-8"
+      // );
+      // console.log(`Extracted keys written to: ${outputFilePath}`);
 
       return generator(ast).code;
     },

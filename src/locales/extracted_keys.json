@@ -1,5 +1,6 @@
 {
-  "Edit <code style={{ color: 'red' }}> src/App.tsx <span> 3 <strong>goats</strong> </span> </code> and save to test <strong>HMR</strong>": "",
+  "Edit <a target={'-blank'} style={{ color: 'red' }} href={'https://www.google.com/'}>src/App.tsx <span>3 <strong>goats </strong></span></a>and save to test <strong>HMR </strong>": "",
+  "Test content": "",
   "what is betkumi affiliate program": "",
   "BetKumi Affiliates is a program where we give you the opportunity to earn money every month simply by giving us the chance to welcome more players through our virtual doors.": "",
   "How does the Affiliate Program work": "",
@@ -8,7 +9,7 @@
   "As part of our affiliate network, you will be paid in a revenue share based model. You earn a 30% commission on revenues made.": "",
   "When can I withdraw?": "",
   "You can withdraw your earnings once you have accumulated a minimum of {currency} {VITE_REFERRAL_MIN_PAYOUT}.": "",
-  "You can withdraw your earnings if 14 days have passed since your last withdrawal.": "",
+  "You can withdraw your earnings if {VITE_REFERRAL_MIN_PAYOUT} days have passed since your last withdrawal.": "",
   "Edit Vite + React": "",
   "count is": "",
   "Click on the Vite and React logos to learn more": ""

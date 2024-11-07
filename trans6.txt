@@ -1,0 +1,1509 @@
+
+Str:: Hariri <a target={'-blank'} style={{ color: 'red' }} href={'https://www.google.com/'}>src/App.tsx <span><strong>mbuzi </strong>3 </span></a>na uhifadhi ili kujaribu <strong>HMR </strong>
+Node {
+  type: 'Program',
+  start: 0,
+  end: 191,
+  loc: SourceLocation {
+    start: Position { line: 1, column: 0, index: 0 },
+    end: Position { line: 1, column: 191, index: 191 },
+    filename: undefined,
+    identifierName: undefined
+  },
+  sourceType: 'module',
+  interpreter: null,
+  body: [
+    Node {
+      type: 'ExpressionStatement',
+      start: 0,
+      end: 191,
+      loc: SourceLocation {
+        start: Position { line: 1, column: 0, index: 0 },
+        end: Position { line: 1, column: 191, index: 191 },
+        filename: undefined,
+        identifierName: undefined
+      },
+      expression: Node {
+        type: 'JSXFragment',
+        start: 0,
+        end: 191,
+        loc: SourceLocation {
+          start: Position { line: 1, column: 0, index: 0 },
+          end: Position { line: 1, column: 191, index: 191 },
+          filename: undefined,
+          identifierName: undefined
+        },
+        openingFragment: Node {
+          type: 'JSXOpeningFragment',
+          start: 0,
+          end: 2,
+          loc: SourceLocation {
+            start: Position { line: 1, column: 0, index: 0 },
+            end: Position { line: 1, column: 2, index: 2 },
+            filename: undefined,
+            identifierName: undefined
+          }
+        },
+        closingFragment: Node {
+          type: 'JSXClosingFragment',
+          start: 188,
+          end: 191,
+          loc: SourceLocation {
+            start: Position { line: 1, column: 188, index: 188 },
+            end: Position { line: 1, column: 191, index: 191 },
+            filename: undefined,
+            identifierName: undefined
+          }
+        },
+        children: [
+          Node {
+            type: 'JSXText',
+            start: 2,
+            end: 9,
+            loc: SourceLocation {
+              start: Position { line: 1, column: 2, index: 2 },
+              end: Position { line: 1, column: 9, index: 9 },
+              filename: undefined,
+              identifierName: undefined
+            },
+            extra: { rawValue: 'Hariri ', raw: 'Hariri ' },
+            value: 'Hariri '
+          },
+          Node {
+            type: 'JSXElement',
+            start: 9,
+            end: 142,
+            loc: SourceLocation {
+              start: Position { line: 1, column: 9, index: 9 },
+              end: Position { line: 1, column: 142, index: 142 },
+              filename: undefined,
+              identifierName: undefined
+            },
+            openingElement: Node {
+              type: 'JSXOpeningElement',
+              start: 9,
+              end: 88,
+              loc: SourceLocation {
+                start: Position { line: 1, column: 9, index: 9 },
+                end: Position { line: 1, column: 88, index: 88 },
+                filename: undefined,
+                identifierName: undefined
+              },
+              name: Node {
+                type: 'JSXIdentifier',
+                start: 10,
+                end: 11,
+                loc: SourceLocation {
+                  start: Position { line: 1, column: 10, index: 10 },
+                  end: Position { line: 1, column: 11, index: 11 },
+                  filename: undefined,
+                  identifierName: undefined
+                },
+                name: 'a'
+              },
+              attributes: [
+                Node {
+                  type: 'JSXAttribute',
+                  start: 12,
+                  end: 29,
+                  loc: SourceLocation {
+                    start: Position { line: 1, column: 12, index: 12 },
+                    end: Position { line: 1, column: 29, index: 29 },
+                    filename: undefined,
+                    identifierName: undefined
+                  },
+                  name: Node {
+                    type: 'JSXIdentifier',
+                    start: 12,
+                    end: 18,
+                    loc: SourceLocation {
+                      start: Position { line: 1, column: 12, index: 12 },
+                      end: Position { line: 1, column: 18, index: 18 },
+                      filename: undefined,
+                      identifierName: undefined
+                    },
+                    name: 'target'
+                  },
+                  value: Node {
+                    type: 'JSXExpressionContainer',
+                    start: 19,
+                    end: 29,
+                    loc: SourceLocation {
+                      start: Position { line: 1, column: 19, index: 19 },
+                      end: Position { line: 1, column: 29, index: 29 },
+                      filename: undefined,
+                      identifierName: undefined
+                    },
+                    expression: Node {
+                      type: 'StringLiteral',
+                      start: 20,
+                      end: 28,
+                      loc: SourceLocation {
+                        start: Position { line: 1, column: 20, index: 20 },
+                        end: Position { line: 1, column: 28, index: 28 },
+                        filename: undefined,
+                        identifierName: undefined
+                      },
+                      extra: { rawValue: '-blank', raw: "'-blank'" },
+                      value: '-blank'
+                    }
+                  }
+                },
+                Node {
+                  type: 'JSXAttribute',
+                  start: 30,
+                  end: 54,
+                  loc: SourceLocation {
+                    start: Position { line: 1, column: 30, index: 30 },
+                    end: Position { line: 1, column: 54, index: 54 },
+                    filename: undefined,
+                    identifierName: undefined
+                  },
+                  name: Node {
+                    type: 'JSXIdentifier',
+                    start: 30,
+                    end: 35,
+                    loc: SourceLocation {
+                      start: Position { line: 1, column: 30, index: 30 },
+                      end: Position { line: 1, column: 35, index: 35 },
+                      filename: undefined,
+                      identifierName: undefined
+                    },
+                    name: 'style'
+                  },
+                  value: Node {
+                    type: 'JSXExpressionContainer',
+                    start: 36,
+                    end: 54,
+                    loc: SourceLocation {
+                      start: Position { line: 1, column: 36, index: 36 },
+                      end: Position { line: 1, column: 54, index: 54 },
+                      filename: undefined,
+                      identifierName: undefined
+                    },
+                    expression: Node {
+                      type: 'ObjectExpression',
+                      start: 37,
+                      end: 53,
+                      loc: SourceLocation {
+                        start: Position { line: 1, column: 37, index: 37 },
+                        end: Position { line: 1, column: 53, index: 53 },
+                        filename: undefined,
+                        identifierName: undefined
+                      },
+                      properties: [
+                        Node {
+                          type: 'ObjectProperty',
+                          start: 39,
+                          end: 51,
+                          loc: SourceLocation {
+                            start: Position { line: 1, column: 39, index: 39 },
+                            end: Position { line: 1, column: 51, index: 51 },
+                            filename: undefined,
+                            identifierName: undefined
+                          },
+                          method: false,
+                          key: Node {
+                            type: 'Identifier',
+                            start: 39,
+                            end: 44,
+                            loc: SourceLocation {
+                              start: Position {
+                                line: 1,
+                                column: 39,
+                                index: 39
+                              },
+                              end: Position {
+                                line: 1,
+                                column: 44,
+                                index: 44
+                              },
+                              filename: undefined,
+                              identifierName: 'color'
+                            },
+                            name: 'color'
+                          },
+                          computed: false,
+                          shorthand: false,
+                          value: Node {
+                            type: 'StringLiteral',
+                            start: 46,
+                            end: 51,
+                            loc: SourceLocation {
+                              start: Position {
+                                line: 1,
+                                column: 46,
+                                index: 46
+                              },
+                              end: Position {
+                                line: 1,
+                                column: 51,
+                                index: 51
+                              },
+                              filename: undefined,
+                              identifierName: undefined
+                            },
+                            extra: { rawValue: 'red', raw: "'red'" },
+                            value: 'red'
+                          }
+                        }
+                      ]
+                    }
+                  }
+                },
+                Node {
+                  type: 'JSXAttribute',
+                  start: 55,
+                  end: 87,
+                  loc: SourceLocation {
+                    start: Position { line: 1, column: 55, index: 55 },
+                    end: Position { line: 1, column: 87, index: 87 },
+                    filename: undefined,
+                    identifierName: undefined
+                  },
+                  name: Node {
+                    type: 'JSXIdentifier',
+                    start: 55,
+                    end: 59,
+                    loc: SourceLocation {
+                      start: Position { line: 1, column: 55, index: 55 },
+                      end: Position { line: 1, column: 59, index: 59 },
+                      filename: undefined,
+                      identifierName: undefined
+                    },
+                    name: 'href'
+                  },
+                  value: Node {
+                    type: 'JSXExpressionContainer',
+                    start: 60,
+                    end: 87,
+                    loc: SourceLocation {
+                      start: Position { line: 1, column: 60, index: 60 },
+                      end: Position { line: 1, column: 87, index: 87 },
+                      filename: undefined,
+                      identifierName: undefined
+                    },
+                    expression: Node {
+                      type: 'StringLiteral',
+                      start: 61,
+                      end: 86,
+                      loc: SourceLocation {
+                        start: Position { line: 1, column: 61, index: 61 },
+                        end: Position { line: 1, column: 86, index: 86 },
+                        filename: undefined,
+                        identifierName: undefined
+                      },
+                      extra: {
+                        rawValue: 'https://www.google.com/',
+                        raw: "'https://www.google.com/'"
+                      },
+                      value: 'https://www.google.com/'
+                    }
+                  }
+                }
+              ],
+              selfClosing: false
+            },
+            closingElement: Node {
+              type: 'JSXClosingElement',
+              start: 138,
+              end: 142,
+              loc: SourceLocation {
+                start: Position { line: 1, column: 138, index: 138 },
+                end: Position { line: 1, column: 142, index: 142 },
+                filename: undefined,
+                identifierName: undefined
+              },
+              name: Node {
+                type: 'JSXIdentifier',
+                start: 140,
+                end: 141,
+                loc: SourceLocation {
+                  start: Position { line: 1, column: 140, index: 140 },
+                  end: Position { line: 1, column: 141, index: 141 },
+                  filename: undefined,
+                  identifierName: undefined
+                },
+                name: 'a'
+              }
+            },
+            children: [
+              Node {
+                type: 'JSXText',
+                start: 88,
+                end: 100,
+                loc: SourceLocation {
+                  start: Position { line: 1, column: 88, index: 88 },
+                  end: Position { line: 1, column: 100, index: 100 },
+                  filename: undefined,
+                  identifierName: undefined
+                },
+                extra: { rawValue: 'src/App.tsx ', raw: 'src/App.tsx ' },
+                value: 'src/App.tsx '
+              },
+              Node {
+                type: 'JSXElement',
+                start: 100,
+                end: 138,
+                loc: SourceLocation {
+                  start: Position { line: 1, column: 100, index: 100 },
+                  end: Position { line: 1, column: 138, index: 138 },
+                  filename: undefined,
+                  identifierName: undefined
+                },
+                openingElement: Node {
+                  type: 'JSXOpeningElement',
+                  start: 100,
+                  end: 106,
+                  loc: SourceLocation {
+                    start: Position { line: 1, column: 100, index: 100 },
+                    end: Position { line: 1, column: 106, index: 106 },
+                    filename: undefined,
+                    identifierName: undefined
+                  },
+                  name: Node {
+                    type: 'JSXIdentifier',
+                    start: 101,
+                    end: 105,
+                    loc: SourceLocation {
+                      start: Position { line: 1, column: 101, index: 101 },
+                      end: Position { line: 1, column: 105, index: 105 },
+                      filename: undefined,
+                      identifierName: undefined
+                    },
+                    name: 'span'
+                  },
+                  attributes: [],
+                  selfClosing: false
+                },
+                closingElement: Node {
+                  type: 'JSXClosingElement',
+                  start: 131,
+                  end: 138,
+                  loc: SourceLocation {
+                    start: Position { line: 1, column: 131, index: 131 },
+                    end: Position { line: 1, column: 138, index: 138 },
+                    filename: undefined,
+                    identifierName: undefined
+                  },
+                  name: Node {
+                    type: 'JSXIdentifier',
+                    start: 133,
+                    end: 137,
+                    loc: SourceLocation {
+                      start: Position { line: 1, column: 133, index: 133 },
+                      end: Position { line: 1, column: 137, index: 137 },
+                      filename: undefined,
+                      identifierName: undefined
+                    },
+                    name: 'span'
+                  }
+                },
+                children: [
+                  Node {
+                    type: 'JSXElement',
+                    start: 106,
+                    end: 129,
+                    loc: SourceLocation {
+                      start: Position { line: 1, column: 106, index: 106 },
+                      end: Position { line: 1, column: 129, index: 129 },
+                      filename: undefined,
+                      identifierName: undefined
+                    },
+                    openingElement: Node {
+                      type: 'JSXOpeningElement',
+                      start: 106,
+                      end: 114,
+                      loc: SourceLocation {
+                        start: Position { line: 1, column: 106, index: 106 },
+                        end: Position { line: 1, column: 114, index: 114 },
+                        filename: undefined,
+                        identifierName: undefined
+                      },
+                      name: Node {
+                        type: 'JSXIdentifier',
+                        start: 107,
+                        end: 113,
+                        loc: SourceLocation {
+                          start: Position { line: 1, column: 107, index: 107 },
+                          end: Position { line: 1, column: 113, index: 113 },
+                          filename: undefined,
+                          identifierName: undefined
+                        },
+                        name: 'strong'
+                      },
+                      attributes: [],
+                      selfClosing: false
+                    },
+                    closingElement: Node {
+                      type: 'JSXClosingElement',
+                      start: 120,
+                      end: 129,
+                      loc: SourceLocation {
+                        start: Position { line: 1, column: 120, index: 120 },
+                        end: Position { line: 1, column: 129, index: 129 },
+                        filename: undefined,
+                        identifierName: undefined
+                      },
+                      name: Node {
+                        type: 'JSXIdentifier',
+                        start: 122,
+                        end: 128,
+                        loc: SourceLocation {
+                          start: Position { line: 1, column: 122, index: 122 },
+                          end: Position { line: 1, column: 128, index: 128 },
+                          filename: undefined,
+                          identifierName: undefined
+                        },
+                        name: 'strong'
+                      }
+                    },
+                    children: [
+                      Node {
+                        type: 'JSXText',
+                        start: 114,
+                        end: 120,
+                        loc: SourceLocation {
+                          start: Position { line: 1, column: 114, index: 114 },
+                          end: Position { line: 1, column: 120, index: 120 },
+                          filename: undefined,
+                          identifierName: undefined
+                        },
+                        extra: { rawValue: 'mbuzi ', raw: 'mbuzi ' },
+                        value: 'mbuzi '
+                      }
+                    ]
+                  },
+                  Node {
+                    type: 'JSXText',
+                    start: 129,
+                    end: 131,
+                    loc: SourceLocation {
+                      start: Position { line: 1, column: 129, index: 129 },
+                      end: Position { line: 1, column: 131, index: 131 },
+                      filename: undefined,
+                      identifierName: undefined
+                    },
+                    extra: { rawValue: '3 ', raw: '3 ' },
+                    value: '3 '
+                  }
+                ]
+              }
+            ]
+          },
+          Node {
+            type: 'JSXText',
+            start: 142,
+            end: 167,
+            loc: SourceLocation {
+              start: Position { line: 1, column: 142, index: 142 },
+              end: Position { line: 1, column: 167, index: 167 },
+              filename: undefined,
+              identifierName: undefined
+            },
+            extra: {
+              rawValue: 'na uhifadhi ili kujaribu ',
+              raw: 'na uhifadhi ili kujaribu '
+            },
+            value: 'na uhifadhi ili kujaribu '
+          },
+          Node {
+            type: 'JSXElement',
+            start: 167,
+            end: 188,
+            loc: SourceLocation {
+              start: Position { line: 1, column: 167, index: 167 },
+              end: Position { line: 1, column: 188, index: 188 },
+              filename: undefined,
+              identifierName: undefined
+            },
+            openingElement: Node {
+              type: 'JSXOpeningElement',
+              start: 167,
+              end: 175,
+              loc: SourceLocation {
+                start: Position { line: 1, column: 167, index: 167 },
+                end: Position { line: 1, column: 175, index: 175 },
+                filename: undefined,
+                identifierName: undefined
+              },
+              name: Node {
+                type: 'JSXIdentifier',
+                start: 168,
+                end: 174,
+                loc: SourceLocation {
+                  start: Position { line: 1, column: 168, index: 168 },
+                  end: Position { line: 1, column: 174, index: 174 },
+                  filename: undefined,
+                  identifierName: undefined
+                },
+                name: 'strong'
+              },
+              attributes: [],
+              selfClosing: false
+            },
+            closingElement: Node {
+              type: 'JSXClosingElement',
+              start: 179,
+              end: 188,
+              loc: SourceLocation {
+                start: Position { line: 1, column: 179, index: 179 },
+                end: Position { line: 1, column: 188, index: 188 },
+                filename: undefined,
+                identifierName: undefined
+              },
+              name: Node {
+                type: 'JSXIdentifier',
+                start: 181,
+                end: 187,
+                loc: SourceLocation {
+                  start: Position { line: 1, column: 181, index: 181 },
+                  end: Position { line: 1, column: 187, index: 187 },
+                  filename: undefined,
+                  identifierName: undefined
+                },
+                name: 'strong'
+              }
+            },
+            children: [
+              Node {
+                type: 'JSXText',
+                start: 175,
+                end: 179,
+                loc: SourceLocation {
+                  start: Position { line: 1, column: 175, index: 175 },
+                  end: Position { line: 1, column: 179, index: 179 },
+                  filename: undefined,
+                  identifierName: undefined
+                },
+                extra: { rawValue: 'HMR ', raw: 'HMR ' },
+                value: 'HMR '
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  directives: [],
+  extra: { topLevelAwait: false }
+}
+Str:: Maandishi ya kujaribu
+Node {
+  type: 'Program',
+  start: 0,
+  end: 26,
+  loc: SourceLocation {
+    start: Position { line: 1, column: 0, index: 0 },
+    end: Position { line: 1, column: 26, index: 26 },
+    filename: undefined,
+    identifierName: undefined
+  },
+  sourceType: 'module',
+  interpreter: null,
+  body: [
+    Node {
+      type: 'ExpressionStatement',
+      start: 0,
+      end: 26,
+      loc: SourceLocation {
+        start: Position { line: 1, column: 0, index: 0 },
+        end: Position { line: 1, column: 26, index: 26 },
+        filename: undefined,
+        identifierName: undefined
+      },
+      expression: Node {
+        type: 'JSXFragment',
+        start: 0,
+        end: 26,
+        loc: SourceLocation {
+          start: Position { line: 1, column: 0, index: 0 },
+          end: Position { line: 1, column: 26, index: 26 },
+          filename: undefined,
+          identifierName: undefined
+        },
+        openingFragment: Node {
+          type: 'JSXOpeningFragment',
+          start: 0,
+          end: 2,
+          loc: SourceLocation {
+            start: Position { line: 1, column: 0, index: 0 },
+            end: Position { line: 1, column: 2, index: 2 },
+            filename: undefined,
+            identifierName: undefined
+          }
+        },
+        closingFragment: Node {
+          type: 'JSXClosingFragment',
+          start: 23,
+          end: 26,
+          loc: SourceLocation {
+            start: Position { line: 1, column: 23, index: 23 },
+            end: Position { line: 1, column: 26, index: 26 },
+            filename: undefined,
+            identifierName: undefined
+          }
+        },
+        children: [
+          Node {
+            type: 'JSXText',
+            start: 2,
+            end: 23,
+            loc: SourceLocation {
+              start: Position { line: 1, column: 2, index: 2 },
+              end: Position { line: 1, column: 23, index: 23 },
+              filename: undefined,
+              identifierName: undefined
+            },
+            extra: {
+              rawValue: 'Maandishi ya kujaribu',
+              raw: 'Maandishi ya kujaribu'
+            },
+            value: 'Maandishi ya kujaribu'
+          }
+        ]
+      }
+    }
+  ],
+  directives: [],
+  extra: { topLevelAwait: false }
+}
+Str:: ni nini mpango wa ushirika wa betkumi
+Node {
+  type: 'Program',
+  start: 0,
+  end: 42,
+  loc: SourceLocation {
+    start: Position { line: 1, column: 0, index: 0 },
+    end: Position { line: 1, column: 42, index: 42 },
+    filename: undefined,
+    identifierName: undefined
+  },
+  sourceType: 'module',
+  interpreter: null,
+  body: [
+    Node {
+      type: 'ExpressionStatement',
+      start: 0,
+      end: 42,
+      loc: SourceLocation {
+        start: Position { line: 1, column: 0, index: 0 },
+        end: Position { line: 1, column: 42, index: 42 },
+        filename: undefined,
+        identifierName: undefined
+      },
+      expression: Node {
+        type: 'JSXFragment',
+        start: 0,
+        end: 42,
+        loc: SourceLocation {
+          start: Position { line: 1, column: 0, index: 0 },
+          end: Position { line: 1, column: 42, index: 42 },
+          filename: undefined,
+          identifierName: undefined
+        },
+        openingFragment: Node {
+          type: 'JSXOpeningFragment',
+          start: 0,
+          end: 2,
+          loc: SourceLocation {
+            start: Position { line: 1, column: 0, index: 0 },
+            end: Position { line: 1, column: 2, index: 2 },
+            filename: undefined,
+            identifierName: undefined
+          }
+        },
+        closingFragment: Node {
+          type: 'JSXClosingFragment',
+          start: 39,
+          end: 42,
+          loc: SourceLocation {
+            start: Position { line: 1, column: 39, index: 39 },
+            end: Position { line: 1, column: 42, index: 42 },
+            filename: undefined,
+            identifierName: undefined
+          }
+        },
+        children: [
+          Node {
+            type: 'JSXText',
+            start: 2,
+            end: 39,
+            loc: SourceLocation {
+              start: Position { line: 1, column: 2, index: 2 },
+              end: Position { line: 1, column: 39, index: 39 },
+              filename: undefined,
+              identifierName: undefined
+            },
+            extra: {
+              rawValue: 'ni nini mpango wa ushirika wa betkumi',
+              raw: 'ni nini mpango wa ushirika wa betkumi'
+            },
+            value: 'ni nini mpango wa ushirika wa betkumi'
+          }
+        ]
+      }
+    }
+  ],
+  directives: [],
+  extra: { topLevelAwait: false }
+}
+Str:: Washirika wa BetKumi ni mpango ambao tunakupa fursa ya kupata pesa kila mwezi kwa kutupatia nafasi ya kuwakaribisha wachezaji zaidi kupitia milango yetu ya kawaida.
+Node {
+  type: 'Program',
+  start: 0,
+  end: 169,
+  loc: SourceLocation {
+    start: Position { line: 1, column: 0, index: 0 },
+    end: Position { line: 1, column: 169, index: 169 },
+    filename: undefined,
+    identifierName: undefined
+  },
+  sourceType: 'module',
+  interpreter: null,
+  body: [
+    Node {
+      type: 'ExpressionStatement',
+      start: 0,
+      end: 169,
+      loc: SourceLocation {
+        start: Position { line: 1, column: 0, index: 0 },
+        end: Position { line: 1, column: 169, index: 169 },
+        filename: undefined,
+        identifierName: undefined
+      },
+      expression: Node {
+        type: 'JSXFragment',
+        start: 0,
+        end: 169,
+        loc: SourceLocation {
+          start: Position { line: 1, column: 0, index: 0 },
+          end: Position { line: 1, column: 169, index: 169 },
+          filename: undefined,
+          identifierName: undefined
+        },
+        openingFragment: Node {
+          type: 'JSXOpeningFragment',
+          start: 0,
+          end: 2,
+          loc: SourceLocation {
+            start: Position { line: 1, column: 0, index: 0 },
+            end: Position { line: 1, column: 2, index: 2 },
+            filename: undefined,
+            identifierName: undefined
+          }
+        },
+        closingFragment: Node {
+          type: 'JSXClosingFragment',
+          start: 166,
+          end: 169,
+          loc: SourceLocation {
+            start: Position { line: 1, column: 166, index: 166 },
+            end: Position { line: 1, column: 169, index: 169 },
+            filename: undefined,
+            identifierName: undefined
+          }
+        },
+        children: [
+          Node {
+            type: 'JSXText',
+            start: 2,
+            end: 166,
+            loc: SourceLocation {
+              start: Position { line: 1, column: 2, index: 2 },
+              end: Position { line: 1, column: 166, index: 166 },
+              filename: undefined,
+              identifierName: undefined
+            },
+            extra: {
+              rawValue: 'Washirika wa BetKumi ni mpango ambao tunakupa fursa ya kupata pesa kila mwezi kwa kutupatia nafasi ya kuwakaribisha wachezaji zaidi kupitia milango yetu ya kawaida.',
+              raw: 'Washirika wa BetKumi ni mpango ambao tunakupa fursa ya kupata pesa kila mwezi kwa kutupatia nafasi ya kuwakaribisha wachezaji zaidi kupitia milango yetu ya kawaida.'
+            },
+            value: 'Washirika wa BetKumi ni mpango ambao tunakupa fursa ya kupata pesa kila mwezi kwa kutupatia nafasi ya kuwakaribisha wachezaji zaidi kupitia milango yetu ya kawaida.'
+          }
+        ]
+      }
+    }
+  ],
+  directives: [],
+  extra: { topLevelAwait: false }
+}
+Str:: Je! Programu ya Ushirika inafanyaje kazi
+Node {
+  type: 'Program',
+  start: 0,
+  end: 45,
+  loc: SourceLocation {
+    start: Position { line: 1, column: 0, index: 0 },
+    end: Position { line: 1, column: 45, index: 45 },
+    filename: undefined,
+    identifierName: undefined
+  },
+  sourceType: 'module',
+  interpreter: null,
+  body: [
+    Node {
+      type: 'ExpressionStatement',
+      start: 0,
+      end: 45,
+      loc: SourceLocation {
+        start: Position { line: 1, column: 0, index: 0 },
+        end: Position { line: 1, column: 45, index: 45 },
+        filename: undefined,
+        identifierName: undefined
+      },
+      expression: Node {
+        type: 'JSXFragment',
+        start: 0,
+        end: 45,
+        loc: SourceLocation {
+          start: Position { line: 1, column: 0, index: 0 },
+          end: Position { line: 1, column: 45, index: 45 },
+          filename: undefined,
+          identifierName: undefined
+        },
+        openingFragment: Node {
+          type: 'JSXOpeningFragment',
+          start: 0,
+          end: 2,
+          loc: SourceLocation {
+            start: Position { line: 1, column: 0, index: 0 },
+            end: Position { line: 1, column: 2, index: 2 },
+            filename: undefined,
+            identifierName: undefined
+          }
+        },
+        closingFragment: Node {
+          type: 'JSXClosingFragment',
+          start: 42,
+          end: 45,
+          loc: SourceLocation {
+            start: Position { line: 1, column: 42, index: 42 },
+            end: Position { line: 1, column: 45, index: 45 },
+            filename: undefined,
+            identifierName: undefined
+          }
+        },
+        children: [
+          Node {
+            type: 'JSXText',
+            start: 2,
+            end: 42,
+            loc: SourceLocation {
+              start: Position { line: 1, column: 2, index: 2 },
+              end: Position { line: 1, column: 42, index: 42 },
+              filename: undefined,
+              identifierName: undefined
+            },
+            extra: {
+              rawValue: 'Je! Programu ya Ushirika inafanyaje kazi',
+              raw: 'Je! Programu ya Ushirika inafanyaje kazi'
+            },
+            value: 'Je! Programu ya Ushirika inafanyaje kazi'
+          }
+        ]
+      }
+    }
+  ],
+  directives: [],
+  extra: { topLevelAwait: false }
+}
+Str:: Unaposhiriki kiunga chako cha rufaa na marafiki wako wowote, familia au kutangaza kiunga na saini ya mchezaji kwenye tovuti yetu kuwa mchezaji anakuwa rufaa yako na watakupa tume kwa kucheza huko Betkumi.
+Node {
+  type: 'Program',
+  start: 0,
+  end: 209,
+  loc: SourceLocation {
+    start: Position { line: 1, column: 0, index: 0 },
+    end: Position { line: 1, column: 209, index: 209 },
+    filename: undefined,
+    identifierName: undefined
+  },
+  sourceType: 'module',
+  interpreter: null,
+  body: [
+    Node {
+      type: 'ExpressionStatement',
+      start: 0,
+      end: 209,
+      loc: SourceLocation {
+        start: Position { line: 1, column: 0, index: 0 },
+        end: Position { line: 1, column: 209, index: 209 },
+        filename: undefined,
+        identifierName: undefined
+      },
+      expression: Node {
+        type: 'JSXFragment',
+        start: 0,
+        end: 209,
+        loc: SourceLocation {
+          start: Position { line: 1, column: 0, index: 0 },
+          end: Position { line: 1, column: 209, index: 209 },
+          filename: undefined,
+          identifierName: undefined
+        },
+        openingFragment: Node {
+          type: 'JSXOpeningFragment',
+          start: 0,
+          end: 2,
+          loc: SourceLocation {
+            start: Position { line: 1, column: 0, index: 0 },
+            end: Position { line: 1, column: 2, index: 2 },
+            filename: undefined,
+            identifierName: undefined
+          }
+        },
+        closingFragment: Node {
+          type: 'JSXClosingFragment',
+          start: 206,
+          end: 209,
+          loc: SourceLocation {
+            start: Position { line: 1, column: 206, index: 206 },
+            end: Position { line: 1, column: 209, index: 209 },
+            filename: undefined,
+            identifierName: undefined
+          }
+        },
+        children: [
+          Node {
+            type: 'JSXText',
+            start: 2,
+            end: 206,
+            loc: SourceLocation {
+              start: Position { line: 1, column: 2, index: 2 },
+              end: Position { line: 1, column: 206, index: 206 },
+              filename: undefined,
+              identifierName: undefined
+            },
+            extra: {
+              rawValue: 'Unaposhiriki kiunga chako cha rufaa na marafiki wako wowote, familia au kutangaza kiunga na saini ya mchezaji kwenye tovuti yetu kuwa mchezaji anakuwa rufaa yako na watakupa tume kwa kucheza huko Betkumi.',
+              raw: 'Unaposhiriki kiunga chako cha rufaa na marafiki wako wowote, familia au kutangaza kiunga na saini ya mchezaji kwenye tovuti yetu kuwa mchezaji anakuwa rufaa yako na watakupa tume kwa kucheza huko Betkumi.'
+            },
+            value: 'Unaposhiriki kiunga chako cha rufaa na marafiki wako wowote, familia au kutangaza kiunga na saini ya mchezaji kwenye tovuti yetu kuwa mchezaji anakuwa rufaa yako na watakupa tume kwa kucheza huko Betkumi.'
+          }
+        ]
+      }
+    }
+  ],
+  directives: [],
+  extra: { topLevelAwait: false }
+}
+Str:: Je! Ninapata pesa ngapi?
+Node {
+  type: 'Program',
+  start: 0,
+  end: 29,
+  loc: SourceLocation {
+    start: Position { line: 1, column: 0, index: 0 },
+    end: Position { line: 1, column: 29, index: 29 },
+    filename: undefined,
+    identifierName: undefined
+  },
+  sourceType: 'module',
+  interpreter: null,
+  body: [
+    Node {
+      type: 'ExpressionStatement',
+      start: 0,
+      end: 29,
+      loc: SourceLocation {
+        start: Position { line: 1, column: 0, index: 0 },
+        end: Position { line: 1, column: 29, index: 29 },
+        filename: undefined,
+        identifierName: undefined
+      },
+      expression: Node {
+        type: 'JSXFragment',
+        start: 0,
+        end: 29,
+        loc: SourceLocation {
+          start: Position { line: 1, column: 0, index: 0 },
+          end: Position { line: 1, column: 29, index: 29 },
+          filename: undefined,
+          identifierName: undefined
+        },
+        openingFragment: Node {
+          type: 'JSXOpeningFragment',
+          start: 0,
+          end: 2,
+          loc: SourceLocation {
+            start: Position { line: 1, column: 0, index: 0 },
+            end: Position { line: 1, column: 2, index: 2 },
+            filename: undefined,
+            identifierName: undefined
+          }
+        },
+        closingFragment: Node {
+          type: 'JSXClosingFragment',
+          start: 26,
+          end: 29,
+          loc: SourceLocation {
+            start: Position { line: 1, column: 26, index: 26 },
+            end: Position { line: 1, column: 29, index: 29 },
+            filename: undefined,
+            identifierName: undefined
+          }
+        },
+        children: [
+          Node {
+            type: 'JSXText',
+            start: 2,
+            end: 26,
+            loc: SourceLocation {
+              start: Position { line: 1, column: 2, index: 2 },
+              end: Position { line: 1, column: 26, index: 26 },
+              filename: undefined,
+              identifierName: undefined
+            },
+            extra: {
+              rawValue: 'Je! Ninapata pesa ngapi?',
+              raw: 'Je! Ninapata pesa ngapi?'
+            },
+            value: 'Je! Ninapata pesa ngapi?'
+          }
+        ]
+      }
+    }
+  ],
+  directives: [],
+  extra: { topLevelAwait: false }
+}
+Str:: Kama sehemu ya mtandao wetu wa ushirika, utalipwa kwa mfano wa mapato. Unapata tume ya 30% juu ya mapato yaliyofanywa.
+Node {
+  type: 'Program',
+  start: 0,
+  end: 123,
+  loc: SourceLocation {
+    start: Position { line: 1, column: 0, index: 0 },
+    end: Position { line: 1, column: 123, index: 123 },
+    filename: undefined,
+    identifierName: undefined
+  },
+  sourceType: 'module',
+  interpreter: null,
+  body: [
+    Node {
+      type: 'ExpressionStatement',
+      start: 0,
+      end: 123,
+      loc: SourceLocation {
+        start: Position { line: 1, column: 0, index: 0 },
+        end: Position { line: 1, column: 123, index: 123 },
+        filename: undefined,
+        identifierName: undefined
+      },
+      expression: Node {
+        type: 'JSXFragment',
+        start: 0,
+        end: 123,
+        loc: SourceLocation {
+          start: Position { line: 1, column: 0, index: 0 },
+          end: Position { line: 1, column: 123, index: 123 },
+          filename: undefined,
+          identifierName: undefined
+        },
+        openingFragment: Node {
+          type: 'JSXOpeningFragment',
+          start: 0,
+          end: 2,
+          loc: SourceLocation {
+            start: Position { line: 1, column: 0, index: 0 },
+            end: Position { line: 1, column: 2, index: 2 },
+            filename: undefined,
+            identifierName: undefined
+          }
+        },
+        closingFragment: Node {
+          type: 'JSXClosingFragment',
+          start: 120,
+          end: 123,
+          loc: SourceLocation {
+            start: Position { line: 1, column: 120, index: 120 },
+            end: Position { line: 1, column: 123, index: 123 },
+            filename: undefined,
+            identifierName: undefined
+          }
+        },
+        children: [
+          Node {
+            type: 'JSXText',
+            start: 2,
+            end: 120,
+            loc: SourceLocation {
+              start: Position { line: 1, column: 2, index: 2 },
+              end: Position { line: 1, column: 120, index: 120 },
+              filename: undefined,
+              identifierName: undefined
+            },
+            extra: {
+              rawValue: 'Kama sehemu ya mtandao wetu wa ushirika, utalipwa kwa mfano wa mapato. Unapata tume ya 30% juu ya mapato yaliyofanywa.',
+              raw: 'Kama sehemu ya mtandao wetu wa ushirika, utalipwa kwa mfano wa mapato. Unapata tume ya 30% juu ya mapato yaliyofanywa.'
+            },
+            value: 'Kama sehemu ya mtandao wetu wa ushirika, utalipwa kwa mfano wa mapato. Unapata tume ya 30% juu ya mapato yaliyofanywa.'
+          }
+        ]
+      }
+    }
+  ],
+  directives: [],
+  extra: { topLevelAwait: false }
+}
+Str:: Naweza kujiondoa lini?
+Node {
+  type: 'Program',
+  start: 0,
+  end: 27,
+  loc: SourceLocation {
+    start: Position { line: 1, column: 0, index: 0 },
+    end: Position { line: 1, column: 27, index: 27 },
+    filename: undefined,
+    identifierName: undefined
+  },
+  sourceType: 'module',
+  interpreter: null,
+  body: [
+    Node {
+      type: 'ExpressionStatement',
+      start: 0,
+      end: 27,
+      loc: SourceLocation {
+        start: Position { line: 1, column: 0, index: 0 },
+        end: Position { line: 1, column: 27, index: 27 },
+        filename: undefined,
+        identifierName: undefined
+      },
+      expression: Node {
+        type: 'JSXFragment',
+        start: 0,
+        end: 27,
+        loc: SourceLocation {
+          start: Position { line: 1, column: 0, index: 0 },
+          end: Position { line: 1, column: 27, index: 27 },
+          filename: undefined,
+          identifierName: undefined
+        },
+        openingFragment: Node {
+          type: 'JSXOpeningFragment',
+          start: 0,
+          end: 2,
+          loc: SourceLocation {
+            start: Position { line: 1, column: 0, index: 0 },
+            end: Position { line: 1, column: 2, index: 2 },
+            filename: undefined,
+            identifierName: undefined
+          }
+        },
+        closingFragment: Node {
+          type: 'JSXClosingFragment',
+          start: 24,
+          end: 27,
+          loc: SourceLocation {
+            start: Position { line: 1, column: 24, index: 24 },
+            end: Position { line: 1, column: 27, index: 27 },
+            filename: undefined,
+            identifierName: undefined
+          }
+        },
+        children: [
+          Node {
+            type: 'JSXText',
+            start: 2,
+            end: 24,
+            loc: SourceLocation {
+              start: Position { line: 1, column: 2, index: 2 },
+              end: Position { line: 1, column: 24, index: 24 },
+              filename: undefined,
+              identifierName: undefined
+            },
+            extra: {
+              rawValue: 'Naweza kujiondoa lini?',
+              raw: 'Naweza kujiondoa lini?'
+            },
+            value: 'Naweza kujiondoa lini?'
+          }
+        ]
+      }
+    }
+  ],
+  directives: [],
+  extra: { topLevelAwait: false }
+}
+Str:: Unaweza kuondoa mapato yako mara tu utakapokusanya kiwango cha chini cha {currency} {VITE_REFERRAL_MIN_PAYOUT}.
+Node {
+  type: 'Program',
+  start: 0,
+  end: 116,
+  loc: SourceLocation {
+    start: Position { line: 1, column: 0, index: 0 },
+    end: Position { line: 1, column: 116, index: 116 },
+    filename: undefined,
+    identifierName: undefined
+  },
+  sourceType: 'module',
+  interpreter: null,
+  body: [
+    Node {
+      type: 'ExpressionStatement',
+      start: 0,
+      end: 116,
+      loc: SourceLocation {
+        start: Position { line: 1, column: 0, index: 0 },
+        end: Position { line: 1, column: 116, index: 116 },
+        filename: undefined,
+        identifierName: undefined
+      },
+      expression: Node {
+        type: 'JSXFragment',
+        start: 0,
+        end: 116,
+        loc: SourceLocation {
+          start: Position { line: 1, column: 0, index: 0 },
+          end: Position { line: 1, column: 116, index: 116 },
+          filename: undefined,
+          identifierName: undefined
+        },
+        openingFragment: Node {
+          type: 'JSXOpeningFragment',
+          start: 0,
+          end: 2,
+          loc: SourceLocation {
+            start: Position { line: 1, column: 0, index: 0 },
+            end: Position { line: 1, column: 2, index: 2 },
+            filename: undefined,
+            identifierName: undefined
+          }
+        },
+        closingFragment: Node {
+          type: 'JSXClosingFragment',
+          start: 113,
+          end: 116,
+          loc: SourceLocation {
+            start: Position { line: 1, column: 113, index: 113 },
+            end: Position { line: 1, column: 116, index: 116 },
+            filename: undefined,
+            identifierName: undefined
+          }
+        },
+        children: [
+          Node {
+            type: 'JSXText',
+            start: 2,
+            end: 75,
+            loc: SourceLocation {
+              start: Position { line: 1, column: 2, index: 2 },
+              end: Position { line: 1, column: 75, index: 75 },
+              filename: undefined,
+              identifierName: undefined
+            },
+            extra: {
+              rawValue: 'Unaweza kuondoa mapato yako mara tu utakapokusanya kiwango cha chini cha ',
+              raw: 'Unaweza kuondoa mapato yako mara tu utakapokusanya kiwango cha chini cha '
+            },
+            value: 'Unaweza kuondoa mapato yako mara tu utakapokusanya kiwango cha chini cha '
+          },
+          Node {
+            type: 'JSXExpressionContainer',
+            start: 75,
+            end: 85,
+            loc: SourceLocation {
+              start: Position { line: 1, column: 75, index: 75 },
+              end: Position { line: 1, column: 85, index: 85 },
+              filename: undefined,
+              identifierName: undefined
+            },
+            expression: Node {
+              type: 'Identifier',
+              start: 76,
+              end: 84,
+              loc: SourceLocation {
+                start: Position { line: 1, column: 76, index: 76 },
+                end: Position { line: 1, column: 84, index: 84 },
+                filename: undefined,
+                identifierName: 'currency'
+              },
+              name: 'currency'
+            }
+          },
+          Node {
+            type: 'JSXText',
+            start: 85,
+            end: 86,
+            loc: SourceLocation {
+              start: Position { line: 1, column: 85, index: 85 },
+              end: Position { line: 1, column: 86, index: 86 },
+              filename: undefined,
+              identifierName: undefined
+            },
+            extra: { rawValue: ' ', raw: ' ' },
+            value: ' '
+          },
+          Node {
+            type: 'JSXExpressionContainer',
+            start: 86,
+            end: 112,
+            loc: SourceLocation {
+              start: Position { line: 1, column: 86, index: 86 },
+              end: Position { line: 1, column: 112, index: 112 },
+              filename: undefined,
+              identifierName: undefined
+            },
+            expression: Node {
+              type: 'Identifier',
+              start: 87,
+              end: 111,
+              loc: SourceLocation {
+                start: Position { line: 1, column: 87, index: 87 },
+                end: Position { line: 1, column: 111, index: 111 },
+                filename: undefined,
+                identifierName: 'VITE_REFERRAL_MIN_PAYOUT'
+              },
+              name: 'VITE_REFERRAL_MIN_PAYOUT'
+            }
+          },
+          Node {
+            type: 'JSXText',
+            start: 112,
+            end: 113,
+            loc: SourceLocation {
+              start: Position { line: 1, column: 112, index: 112 },
+              end: Position { line: 1, column: 113, index: 113 },
+              filename: undefined,
+              identifierName: undefined
+            },
+            extra: { rawValue: '.', raw: '.' },
+            value: '.'
+          }
+        ]
+      }
+    }
+  ],
+  directives: [],
+  extra: { topLevelAwait: false }
+}
+Str:: Unaweza kuondoa mapato yako ikiwa siku {VITE_REFERRAL_MIN_PAYOUT} zimepita tangu kujiondoa kwako kwa mwisho.
+Node {
+  type: 'Program',
+  start: 0,
+  end: 113,
+  loc: SourceLocation {
+    start: Position { line: 1, column: 0, index: 0 },
+    end: Position { line: 1, column: 113, index: 113 },
+    filename: undefined,
+    identifierName: undefined
+  },
+  sourceType: 'module',
+  interpreter: null,
+  body: [
+    Node {
+      type: 'ExpressionStatement',
+      start: 0,
+      end: 113,
+      loc: SourceLocation {
+        start: Position { line: 1, column: 0, index: 0 },
+        end: Position { line: 1, column: 113, index: 113 },
+        filename: undefined,
+        identifierName: undefined
+      },
+      expression: Node {
+        type: 'JSXFragment',
+        start: 0,
+        end: 113,
+        loc: SourceLocation {
+          start: Position { line: 1, column: 0, index: 0 },
+          end: Position { line: 1, column: 113, index: 113 },
+          filename: undefined,
+          identifierName: undefined
+        },
+        openingFragment: Node {
+          type: 'JSXOpeningFragment',
+          start: 0,
+          end: 2,
+          loc: SourceLocation {
+            start: Position { line: 1, column: 0, index: 0 },
+            end: Position { line: 1, column: 2, index: 2 },
+            filename: undefined,
+            identifierName: undefined
+          }
+        },
+        closingFragment: Node {
+          type: 'JSXClosingFragment',
+          start: 110,
+          end: 113,
+          loc: SourceLocation {
+            start: Position { line: 1, column: 110, index: 110 },
+            end: Position { line: 1, column: 113, index: 113 },
+            filename: undefined,
+            identifierName: undefined
+          }
+        },
+        children: [
+          Node {
+            type: 'JSXText',
+            start: 2,
+            end: 41,
+            loc: SourceLocation {
+              start: Position { line: 1, column: 2, index: 2 },
+              end: Position { line: 1, column: 41, index: 41 },
+              filename: undefined,
+              identifierName: undefined
+            },
+            extra: {
+              rawValue: 'Unaweza kuondoa mapato yako ikiwa siku ',
+              raw: 'Unaweza kuondoa mapato yako ikiwa siku '
+            },
+            value: 'Unaweza kuondoa mapato yako ikiwa siku '
+          },
+          Node {
+            type: 'JSXExpressionContainer',
+            start: 41,
+            end: 67,
+            loc: SourceLocation {
+              start: Position { line: 1, column: 41, index: 41 },
+              end: Position { line: 1, column: 67, index: 67 },
+              filename: undefined,
+              identifierName: undefined
+            },
+            expression: Node {
+              type: 'Identifier',
+              start: 42,
+              end: 66,
+              loc: SourceLocation {
+                start: Position { line: 1, column: 42, index: 42 },
+                end: Position { line: 1, column: 66, index: 66 },
+                filename: undefined,
+                identifierName: 'VITE_REFERRAL_MIN_PAYOUT'
+              },
+              name: 'VITE_REFERRAL_MIN_PAYOUT'
+            }
+          },
+          Node {
+            type: 'JSXText',
+            start: 67,
+            end: 110,
+            loc: SourceLocation {
+              start: Position { line: 1, column: 67, index: 67 },
+              end: Position { line: 1, column: 110, index: 110 },
+              filename: undefined,
+              identifierName: undefined
+            },
+            extra: {
+              rawValue: ' zimepita tangu kujiondoa kwako kwa mwisho.',
+              raw: ' zimepita tangu kujiondoa kwako kwa mwisho.'
+            },
+            value: ' zimepita tangu kujiondoa kwako kwa mwisho.'
+          }
+        ]
+      }
+    }
+  ],
+  directives: [],
+  extra: { topLevelAwait: false }
+}
+✓ 34 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.46 kB │ gzip:  0.30 kB
+dist/assets/react-CHdo91hT.svg    4.13 kB │ gzip:  2.14 kB
+dist/assets/index-n_ryQ3BS.css    1.39 kB │ gzip:  0.72 kB
+dist/assets/index-BV9NgfWH.js   143.65 kB │ gzip: 46.24 kB
+✓ built in 1.87s

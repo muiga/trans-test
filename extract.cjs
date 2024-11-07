@@ -2,6 +2,18 @@ const fs = require("fs");
 const path = require("path");
 const glob = require("glob").glob;
 
+const formatMalformedString = (inputString) => {
+  const trimmedString = inputString.trim();
+  return trimmedString.replace(/\n/g, " ")
+      .replace(/(\s?)(<[^>]*>)/g, ' $2').replace(/\s{2,}/g, ' ')
+      .replace(/{" "}/g, "")
+      .replace(/\s+/g, " ")
+      .replace(/"/g, "'")
+      .replace(/>\s+/g, '>').replace(/\s+</g, ' <')
+      .replace(/(?<!>)<\//g, ' </')
+      .replace(/(\w)\s*(<)/g, '$1 $2');
+};
+
 const processFiles = (directory) => {
   const pattern = path.join(directory, "**/*.tsx");
   const files = glob.sync(pattern);
@@ -10,17 +22,6 @@ const processFiles = (directory) => {
     return;
   }
 
-  const formatMalformedString = (inputString) => {
-    let trimmedString = inputString.trim();
-    let continuousString = trimmedString.replace(/\n/g, " ");
-    continuousString = continuousString.replace(/{" "}/g, "");
-    continuousString = continuousString.replace(/\s+/g, " ");
-    continuousString = continuousString.replace(/"/g, "'");
-    // Step 4: Ensure HTML tags are properly formatted (optional: further validation can be added here)
-    // For this example, we assume tags are already correct
-
-    return continuousString;
-  };
 
   const extractedKeys = {};
 
@@ -31,7 +32,7 @@ const processFiles = (directory) => {
 
     let match;
     while ((match = regex.exec(content)) !== null) {
-      const key = formatMalformedString(match[1]);
+      const key = formatMalformedString(match[1])
       extractedKeys[key] = "";
     }
 
