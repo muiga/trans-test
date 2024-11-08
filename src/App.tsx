@@ -42,7 +42,7 @@ function App() {
             and save to test <strong>HMR</strong>
           </Trans>
           <span style={{display:"block", marginTop:'1rem'}}>
-          <Trans>Test content</Trans>
+          <Trans>Test content.</Trans>
             </span>
         </p>
       </div>

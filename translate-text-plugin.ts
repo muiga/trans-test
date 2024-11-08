@@ -5,8 +5,8 @@ import _babelGenerator from "@babel/generator";
 import _traverse from "@babel/traverse";
 import * as babelTypes from '@babel/types';
 // write to file Imports
-// import * as fs from 'fs';
-// import * as path from 'path';
+import * as fs from 'fs';
+import * as path from 'path';
 
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -173,18 +173,18 @@ export default function translateTextPlugin(env: { [key: string]: string }): Plu
 
       // ----Done elsewhere
       // Write extracted keys to a JSON file
-      // const outputFilePath = path.join(
-      //     __dirname,
-      //     "src",
-      //     "locales",
-      //     "extracted_keys.json"
-      // );
-      // fs.writeFileSync(
-      //     outputFilePath,
-      //     JSON.stringify(extractedKeys, null, 2),
-      //     "utf-8"
-      // );
-      // console.log(`Extracted keys written to: ${outputFilePath}`);
+      const outputFilePath = path.join(
+          __dirname,
+          "src",
+          "locales",
+          "extracted_keys1.json"
+      );
+      fs.writeFileSync(
+          outputFilePath,
+          JSON.stringify(extractedKeys, null, 2),
+          "utf-8"
+      );
+      console.log(`Extracted keys written to: ${outputFilePath}`);
 
       return generator(ast).code;
     },
