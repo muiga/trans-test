@@ -33,7 +33,7 @@ function App() {
         <p>
           <Trans>
             Edit{" "}
-            <a target={"-blank"} style={{ color: "red" }} href={'https://www.google.com/'}>
+            <a target={"-blank"} style={{color: "red"}} href={'https://www.google.com/'}>
               src/App.tsx{" "}
               <span>
                 3 <strong>goats </strong>
@@ -41,8 +41,8 @@ function App() {
             </a>
             and save to test <strong>HMR</strong>
           </Trans>
-          <span style={{display:"block", marginTop:'1rem'}}>
-          <Trans>Test content.</Trans>
+          <span style={{display: "block", marginTop: '1rem'}}>
+            <Trans>Test content.</Trans>
             </span>
         </p>
       </div>

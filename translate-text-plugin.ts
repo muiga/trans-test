@@ -36,6 +36,8 @@ export default function translateTextPlugin(env: { [key: string]: string }): Plu
   console.log("translating....");
   const locale = (env["LOCALE"] || "en")
 
+
+
   let translationMap:Record<string, string>
 
     if(locale in translations){
@@ -59,7 +61,7 @@ export default function translateTextPlugin(env: { [key: string]: string }): Plu
     name: "translate-text-plugin",
     enforce: "pre",
     transform(code: string,id:string): string {
-      if (!id.endsWith('.ts') && !id.endsWith('.tsx') || id.endsWith('main.tsx')) {
+      if (!id.endsWith('.ts') && !id.endsWith('.tsx') || id.endsWith('main.tsx') || locale === 'en') {
         return code;
       }
 
@@ -86,6 +88,7 @@ export default function translateTextPlugin(env: { [key: string]: string }): Plu
           }
         },
       });
+
       // change in components
       allTransComponents.forEach((node:CustomAny)=>{
          const string = formatMalformedString( generator(node).code).replace(/<Trans>|<\/Trans>/g, '').trim()
