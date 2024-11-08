@@ -53,6 +53,10 @@ This plugin reads a `translations.json` file containing translations for differe
 ```javascript
 import { translateTextPlugin } from './translateTextPlugin';
 
-export default {
-  plugins: [translateTextPlugin()],
-};
+export default defineConfig(({ mode }) => {
+  const env = loadEnv(mode, process.cwd(), "");
+
+  return {
+    plugins: [translateTextPlugin(env), ...plugins],
+  };
+});
