@@ -4,7 +4,7 @@ import * as babelParser from "@babel/parser";
 import _babelGenerator from "@babel/generator";
 import _traverse from "@babel/traverse";
 import * as babelTypes from "@babel/types";
-// write to file Imports
+// write to json file Imports
 import * as fs from "fs";
 import * as path from "path";
 
@@ -14,9 +14,9 @@ type CustomAny = any;
 const generator = _babelGenerator.default;
 const traverse = _traverse.default;
 
-const extractStringFromTransCall = (code: string): string | null => {
+const extractStringFromTransCall = (code: string): string => {
   const match = code.match(/trans\(['"`](.*?)['"`]\)/);
-  return match ? match[1] : null;
+  return match ? match[1] : code;
 };
 
 const formatMalformedString = (inputString: string) => {
@@ -32,6 +32,91 @@ const formatMalformedString = (inputString: string) => {
     .replace(/\s+</g, " <")
     .replace(/(?<!>)<\//g, " </")
     .replace(/(\w)\s*(<)/g, "$1 $2");
+};
+
+const extractedKeys: Record<string, string> = {};
+
+const replaceTags=(k:string, w:string[], alternative:string[]):string =>{
+  for (let i = 0; i < w.length; i++) {
+    const part = w[i];
+    if (k.includes(part)) {
+      k = k.replace(part, alternative[i]);
+    }
+  }
+  return k;
+}
+
+const replaceTagsWithIndex = (arr: string[]): string[] => {
+  const tagToIndex = new Map<string, number>;  // Map to track assigned indices for tags
+  let currentIndex = 1;  // Start assigning index from 1
+
+  return arr.map((str) => {
+    const tagMatch = str.match(/<\/?(\w+)/);
+    if (tagMatch) {
+      const tag = tagMatch[1];
+      // If it's an opening tag
+      if (!str.startsWith('</')) {
+        const index = currentIndex
+        tagToIndex.set(`${tag}-${currentIndex}`,currentIndex++) ;
+        return `<${index}>`;
+      }
+
+
+      else {
+        const lastTagToIndex = Array.from(tagToIndex.keys())
+        const currentKey = lastTagToIndex[lastTagToIndex.length-1]
+        const index = tagToIndex.get(currentKey);
+        tagToIndex.delete(currentKey)
+        return `</${index}>`;
+
+
+      }
+    }
+
+    return str;
+  });
+}
+
+const workNode = (
+  node: CustomAny,
+  map: Record<string, string>,
+  isCall = false
+) => {
+  const string = isCall
+    ? extractStringFromTransCall(generator(node).code)
+    : formatMalformedString(generator(node).code)
+        .replace(/<Trans>|<\/Trans>/g, "")
+        .trim();
+
+  const regex = /<[^>]+>/g;  // This regex matches everything between '<' and '>', including the tag and attributes
+  let match;
+  const tags = [];
+
+  while ((match = regex.exec(string)) !== null) {
+    tags.push(match[0]); // match[0] contains the full HTML tag including the '<' and '>'
+  }
+  const replacementTags = tags.length>1? replaceTagsWithIndex(tags):[]
+  const newTrans = replaceTags(string,tags,replacementTags)
+
+  // extract key
+  extractedKeys[newTrans] = "";
+  const newString = map[newTrans];
+
+  if (!newString) {
+    // if no translation is found throw and abort build
+    throw new Error(
+      `Aborting build due to Missing translation for [${string}]`
+    );
+  }
+  const translationValue = replacementTags.length>0? replaceTags(newString, replacementTags,tags): newString
+
+  if(replacementTags.length>0)
+    console.log('res::', tags,replacementTags)
+
+  return babelParser.parse(`<>${translationValue}</>`, {
+    sourceType: "module",
+    plugins: ["jsx", "typescript"],
+  });
 };
 
 export default function translateTextPlugin(env: {
@@ -60,8 +145,6 @@ export default function translateTextPlugin(env: {
     );
   }
 
-  const extractedKeys: Record<string, string> = {};
-
   return {
     name: "translate-text-plugin",
     enforce: "pre",
@@ -82,38 +165,21 @@ export default function translateTextPlugin(env: {
       traverse(ast, {
         JSXElement(path: CustomAny) {
           if (path.node.openingElement.name.name === "Trans") {
-            const string = formatMalformedString(generator(path.node).code)
-              .replace(/<Trans>|<\/Trans>/g, "")
-              .trim();
-            // extract key
-            extractedKeys[string] = "";
-            const newString = translationMap[string];
-
-            if (!newString) {
-              // if no translation is found throw and abort build
-              throw new Error(
-                `Aborting build due to Missing translation for [${string}]`
-              );
-            }
+            const newNode = workNode(path.node, translationMap);
 
             const parentPath = path.parentPath;
             const parentNode = parentPath.node;
 
             if (parentNode.children) {
-              const nodeAst = babelParser.parse(`<>${newString}</>`, {
-                sourceType: "module",
-                plugins: ["jsx", "typescript"],
-              });
-
-              const parentChildren = parentNode.children;
+              const parentChildren: CustomAny[] = parentNode.children;
               const indexInParent = parentChildren.indexOf(path.node);
 
               if (indexInParent !== -1) {
                 if (
-                  "expression" in nodeAst.program.body[0] &&
-                  babelTypes.isJSXFragment(nodeAst.program.body[0].expression)
+                  "expression" in newNode.program.body[0] &&
+                  babelTypes.isJSXFragment(newNode.program.body[0].expression)
                 ) {
-                  const fragment = nodeAst.program.body[0];
+                  const fragment = newNode.program.body[0];
                   parentChildren[indexInParent] = fragment.expression;
                 }
               }
@@ -121,42 +187,23 @@ export default function translateTextPlugin(env: {
           }
         },
         CallExpression(path: CustomAny) {
-          // Check if the callee is named 'trans'
           if (path.node.callee.name === "trans") {
-            const string = extractStringFromTransCall(
-              generator(path.node).code
-            );
-            if (!string) return;
-            // extract key
-            extractedKeys[string] = "";
-            const newString = translationMap[string];
-
-            if (!newString) {
-              // if no translation is found throw and abort build
-              throw new Error(
-                `Aborting build due to Missing translation for [${string}]`
-              );
-            }
+            const newNode = workNode(path.node, translationMap, true);
 
             const parentPath = path.parentPath;
             const parentNode = parentPath.node;
             const grandParentPath = parentPath.parentPath;
             const grandParentNode = grandParentPath.node;
             if (grandParentNode.children) {
-              const nodeAst = babelParser.parse(`<>${newString}</>`, {
-                sourceType: "module",
-                plugins: ["jsx", "typescript"],
-              });
-
-              const grandParentChildren = grandParentNode.children;
-              const indexInParent = grandParentChildren.indexOf(parentNode);
-              if (indexInParent !== -1) {
+              const grandParentChildren: CustomAny[] = grandParentNode.children;
+              const indexOfParent = grandParentChildren.indexOf(parentNode);
+              if (indexOfParent !== -1) {
                 if (
-                  "expression" in nodeAst.program.body[0] &&
-                  babelTypes.isJSXFragment(nodeAst.program.body[0].expression)
+                  "expression" in newNode.program.body[0] &&
+                  babelTypes.isJSXFragment(newNode.program.body[0].expression)
                 ) {
-                  const fragment = nodeAst.program.body[0].expression;
-                  grandParentChildren[indexInParent] = fragment.children[0];
+                  const fragment = newNode.program.body[0].expression;
+                  grandParentChildren[indexOfParent] = fragment.children[0];
                 }
               }
             }
@@ -164,7 +211,6 @@ export default function translateTextPlugin(env: {
         },
       });
 
-      // ----Done elsewhere
       // Write extracted keys to a JSON file
       const outputFilePath = path.join(
         __dirname,
