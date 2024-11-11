@@ -60,16 +60,12 @@ const replaceTagsWithIndex = (arr: string[]): string[] => {
         tagToIndex.set(`${tag}-${currentIndex}`,currentIndex++) ;
         return `<${index}>`;
       }
-
-
       else {
         const lastTagToIndex = Array.from(tagToIndex.keys())
         const currentKey = lastTagToIndex[lastTagToIndex.length-1]
         const index = tagToIndex.get(currentKey);
         tagToIndex.delete(currentKey)
         return `</${index}>`;
-
-
       }
     }
 
@@ -95,7 +91,8 @@ const workNode = (
   while ((match = regex.exec(string)) !== null) {
     tags.push(match[0]); // match[0] contains the full HTML tag including the '<' and '>'
   }
-  const replacementTags = tags.length>1? replaceTagsWithIndex(tags):[]
+
+  const replacementTags = tags.length>0? replaceTagsWithIndex(tags):[]
   const newTrans = replaceTags(string,tags,replacementTags)
 
   // extract key
@@ -103,21 +100,33 @@ const workNode = (
   const newString = map[newTrans];
 
   if (!newString) {
-    // if no translation is found throw and abort build
     throw new Error(
       `Aborting build due to Missing translation for [${string}]`
     );
   }
   const translationValue = replacementTags.length>0? replaceTags(newString, replacementTags,tags): newString
 
-  if(replacementTags.length>0)
-    console.log('res::', tags,replacementTags)
 
   return babelParser.parse(`<>${translationValue}</>`, {
     sourceType: "module",
     plugins: ["jsx", "typescript"],
   });
 };
+
+const writeKeysToFile = (extractedKeys:Record<string, string>)=>{
+  const outputFilePath = path.join(
+      __dirname,
+      "src",
+      "locales",
+      "extracted_keys.json"
+  );
+  fs.writeFileSync(
+      outputFilePath,
+      JSON.stringify(extractedKeys, null, 2),
+      "utf-8"
+  );
+  console.log(`Extracted keys written to: ${outputFilePath}`);
+}
 
 export default function translateTextPlugin(env: {
   [key: string]: string;
@@ -212,18 +221,7 @@ export default function translateTextPlugin(env: {
       });
 
       // Write extracted keys to a JSON file
-      const outputFilePath = path.join(
-        __dirname,
-        "src",
-        "locales",
-        "extracted_keys.json"
-      );
-      fs.writeFileSync(
-        outputFilePath,
-        JSON.stringify(extractedKeys, null, 2),
-        "utf-8"
-      );
-      console.log(`Extracted keys written to: ${outputFilePath}`);
+      writeKeysToFile(extractedKeys)
 
       return generator(ast).code;
     },
