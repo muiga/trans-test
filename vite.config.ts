@@ -5,7 +5,6 @@ import translateTextPlugin from "./translate-text-plugin";
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
-
   return {
     plugins: [translateTextPlugin(env), react()],
     build: {

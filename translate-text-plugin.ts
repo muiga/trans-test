@@ -1,10 +1,9 @@
 import { PluginOption } from "vite";
-import translations from "./src/locales/translations.json";
+import translations from "./locales/translations.json";
 import * as babelParser from "@babel/parser";
 import _babelGenerator from "@babel/generator";
 import _traverse from "@babel/traverse";
 import * as babelTypes from "@babel/types";
-// write to json file Imports
 import * as fs from "fs";
 import * as path from "path";
 
@@ -76,6 +75,7 @@ const replaceTagsWithIndex = (arr: string[]): string[] => {
 const workNode = (
   node: CustomAny,
   map: Record<string, string>,
+  locale:string,
   isCall = false
 ) => {
   const string = isCall
@@ -84,7 +84,8 @@ const workNode = (
         .replace(/<Trans>|<\/Trans>/g, "")
         .trim();
 
-  const regex = /<[^>]+>/g;  // This regex matches everything between '<' and '>', including the tag and attributes
+  // error on nesting
+  const regex = /<[^>]+>/g;
   let match;
   const tags = [];
 
@@ -97,7 +98,8 @@ const workNode = (
 
   // extract key
   extractedKeys[newTrans] = "";
-  const newString = map[newTrans];
+
+  const newString = locale === 'en'?newTrans: map[newTrans];
 
   if (!newString) {
     throw new Error(
@@ -105,7 +107,6 @@ const workNode = (
     );
   }
   const translationValue = replacementTags.length>0? replaceTags(newString, replacementTags,tags): newString
-
 
   return babelParser.parse(`<>${translationValue}</>`, {
     sourceType: "module",
@@ -116,7 +117,6 @@ const workNode = (
 const writeKeysToFile = (extractedKeys:Record<string, string>)=>{
   const outputFilePath = path.join(
       __dirname,
-      "src",
       "locales",
       "extracted_keys.json"
   );
@@ -128,11 +128,9 @@ const writeKeysToFile = (extractedKeys:Record<string, string>)=>{
   console.log(`Extracted keys written to: ${outputFilePath}`);
 }
 
-export default function translateTextPlugin(env: {
-  [key: string]: string;
-}): PluginOption {
+const translateTextPlugin =(env: Record<string, string>): PluginOption =>{
   console.log("translating....");
-  const locale = env["LOCALE"] || "en";
+  const locale = env["LOCALE"] || 'en';
 
   let translationMap: Record<string, string>;
 
@@ -149,10 +147,22 @@ export default function translateTextPlugin(env: {
       );
     }
   } else {
+    console.error(`No locale by the name "${locale}" was found!`)
     throw new Error(
       `Aborting build due to Missing translationMap for [${locale}]`
     );
   }
+
+  const checkDescendants = (currentPath:CustomAny) => {
+    currentPath.traverse({
+      JSXElement(childPath:CustomAny) {
+        if (childPath.node.openingElement.name.name === "Trans") {
+          console.error(`Nesting Trans Components is not allowed!`);
+          throw new Error(`Aborting build due to Nested Trans components.`);
+        }
+      }
+    });
+  };
 
   return {
     name: "translate-text-plugin",
@@ -160,8 +170,7 @@ export default function translateTextPlugin(env: {
     transform(code: string, id: string): string {
       if (
         (!id.endsWith(".ts") && !id.endsWith(".tsx")) ||
-        id.endsWith("main.tsx") ||
-        locale === "en"
+        id.endsWith("main.tsx")
       ) {
         return code;
       }
@@ -174,10 +183,13 @@ export default function translateTextPlugin(env: {
       traverse(ast, {
         JSXElement(path: CustomAny) {
           if (path.node.openingElement.name.name === "Trans") {
-            const newNode = workNode(path.node, translationMap);
+            checkDescendants(path)
 
             const parentPath = path.parentPath;
             const parentNode = parentPath.node;
+
+            const newNode = workNode(path.node, translationMap,locale);
+            if(!newNode) return
 
             if (parentNode.children) {
               const parentChildren: CustomAny[] = parentNode.children;
@@ -197,7 +209,8 @@ export default function translateTextPlugin(env: {
         },
         CallExpression(path: CustomAny) {
           if (path.node.callee.name === "trans") {
-            const newNode = workNode(path.node, translationMap, true);
+            const newNode = workNode(path.node, translationMap,locale, true);
+            if(!newNode) return
 
             const parentPath = path.parentPath;
             const parentNode = parentPath.node;
@@ -227,3 +240,6 @@ export default function translateTextPlugin(env: {
     },
   };
 }
+
+
+export  default translateTextPlugin
