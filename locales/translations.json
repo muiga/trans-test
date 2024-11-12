@@ -1,7 +1,7 @@
 {
   "sw": {
     "Edit <1>src/App.tsx <2>3 <3>goats </3></2></1>and save to test <4>HMR </4>": "Hariri <1>src/App.tsx <2><3>mbuzi </3>3 </2></1>na uhifadhi ili kujaribu <4>HMR </4>",
-    "what is betkumi affiliate program": "ni nini mpango wa ushirika wa betkumi",
+    "what is Betkumi affiliate program": "ni nini mpango wa ushirika wa Betkumi",
     "BetKumi Affiliates is a program where we give you the opportunity to earn money every month simply by giving us the chance to welcome more players through our virtual doors.": "Washirika wa BetKumi ni mpango ambao tunakupa fursa ya kupata pesa kila mwezi kwa kutupatia nafasi ya kuwakaribisha wachezaji zaidi kupitia milango yetu ya kawaida.",
     "When you share your referral link with any of your friends, family or advertise the link and a player signup at our site that player becomes your referral and they will earn you commissions by playing at Betkumi.": "Unaposhiriki kiunga chako cha rufaa na marafiki wako wowote, familia au kutangaza kiunga na saini ya mchezaji kwenye tovuti yetu kuwa mchezaji anakuwa rufaa yako na watakupa tume kwa kucheza huko Betkumi.",
     "As part of our affiliate network, you will be paid in a revenue share based model. You earn a 30% commission on revenues made.": "Kama sehemu ya mtandao wetu wa ushirika, utalipwa kwa mfano wa mapato. Unapata tume ya 30% juu ya mapato yaliyofanywa.",
@@ -18,7 +18,7 @@
   "en": {
     "Edit Vite + React": "Edit Vite + React",
     "count is": "count is",
-    "Edit <code style={{ color: 'red' }}>src/App.tsx <span>3 <strong>goats </strong></span></code>and save to test <strong>HMR </strong>": "Edit <code style={{ color: 'red' }}> src/App.tsx <span> 3 <strong>goats</strong> </span> </code> na uhifadhi ili kujaribu <strong>HMR</strong>",
+    "Edit <1>src/App.tsx <2>3 <3>goats </3></2></1>and save to test <4>HMR </4>": "Edit <1>src/App.tsx <2>3 <3>goats </3></2></1>and save to test <4>HMR </4>",
     "Click on the Vite and React logos to learn more": "Click on the Vite and React logos to learn more"
   }
 }

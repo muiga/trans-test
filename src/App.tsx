@@ -55,7 +55,7 @@ function App() {
         textAlign:'center',
         maxWidth:'70ch'
       }}>
-        <h4> <Trans>what is betkumi affiliate program</Trans></h4>
+        <h4> <Trans>what is Betkumi affiliate program</Trans></h4>
         <p ><Trans>
           BetKumi Affiliates is a program where we give you the opportunity to earn
           money every month simply by giving us the chance to welcome more
@@ -74,7 +74,7 @@ function App() {
           As part of our affiliate network, you will be paid in a revenue share
           based model. You earn a 30% commission on revenues made.</Trans>
         </p>
-        <h4><Trans>When can I withdraw?</Trans></h4>
+        <h4><Trans>When can I withdraw? </Trans></h4>
         <div >
           <ul>
             <li>
